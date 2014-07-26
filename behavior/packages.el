@@ -25,7 +25,6 @@
  'gotest
  'go-mode
  'f
- 'icicles
  'magit
  'git-rebase-mode
  'git-commit-mode

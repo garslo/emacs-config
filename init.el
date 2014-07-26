@@ -14,8 +14,8 @@
 
 (add-hook 'after-init-hook
 	  #'(lambda ()
+		  (load "functions") ; must be first
 		  (load "packages")
-		  (load "functions")
 	      (load "visuals")
 	      (load "behavior")
 		  (load "mode-setup")
