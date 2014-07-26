@@ -38,8 +38,10 @@ A quick run-through of useful Go features:
 | `C-c t t` | `gotest`         | Runs `go test` on the specific test corresponding to the current function               |
 | `C-c g e` | `go-errcheck`    | Runs `errcheck` on the current file                                                     |
 | `C-c l`   | `golint`         | Runs `golint` in the current file                                                       |
-| ---       | ---              | ---                                                                                     |
+| `C-c C-j` | `go-mode`        | `godef` jump to definition                                                              |
+| `C-c C-d` | `go-mode`        | `godef` describe                                                                        |
 | Many      | `go-oracle`      | Execute `C-h a oracle` to see available bindings                                        |
+
 
 
 ## Auto-complete
