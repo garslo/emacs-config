@@ -42,7 +42,8 @@
 ;;
 ;;;; #REQUIRES: paredit
 (defun my-lispy-settings ()
-  (paredit-mode))
+  (paredit-mode 1)
+  (eldoc-mode 1))
 (add-hook 'emacs-lisp-mode-hook 'my-lispy-settings)
 (add-hook 'inferior-emacs-lisp-mode-hook 'my-lispy-settings)
 
