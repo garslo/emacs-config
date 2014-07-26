@@ -2,7 +2,7 @@
   "Customization and setup for go"
   :group 'go)
 
-(defcustom garslo-go-tool-workspace "~/go/go-tools-ws"
+(defcustom garslo-go-tool-workspace "/Users/gslopsema/llnw/go"
   "Location of workspace containing go tools (like impl, oracle, etc.)"
   :type 'string
   :group 'garslo-go-customization
