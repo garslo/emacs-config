@@ -26,3 +26,4 @@
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)
+(put 'set-goal-column 'disabled nil)
