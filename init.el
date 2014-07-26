@@ -9,7 +9,8 @@
 	      (load "visuals")
 	      (load "behavior")
 		  (load "mode-setup")
-		  (load "keybindings")))
+		  (load "keybindings")
+		  (load "go")))
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)
