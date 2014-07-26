@@ -3,7 +3,7 @@
 
 ;; Better searching & things
 ;;;; #REQUIRES icicles
-(icicle-mode 1)
+;(icicle-mode 1)
 
 ;; Buffers with the same names have better distinguishers
 (require 'uniquify)
