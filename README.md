@@ -16,6 +16,17 @@ portions; these will cause some errors without configuration.
 Upon first run, Emacs will install those packages listed in
 `behavor/packages.el`.
 
+## Necessary tools for Go
+
+- `gocode`
+- `godef`
+- `errcheck`
+- `golint`
+- `oracle`
+- `goimports`
+
+Running `setup.sh` will fetch these for you (in `~/go/go-tools-ws` by default).
+
 # Go
 
 A quick run-through of useful Go features:
