@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2014 Gary Slopsema
 
-;; Author: Gary Slospema <gslopsema@gmail.com>
+;; Author: Gary Slopsema <gslopsema@gmail.com>
 ;; Version: 20140728.1
 
 ;; This file is NOT part of GNU Emacs.
