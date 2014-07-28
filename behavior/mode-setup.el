@@ -30,6 +30,12 @@
                             (local-set-key (kbd "RET")
                                            'electrify-return-if-match)))
 
+;; helm
+;;
+;; Better switching, searching
+;;
+(helm-mode 1)
+
 ;; linum
 ;;
 ;; View line numbers when in a programmatic mode
