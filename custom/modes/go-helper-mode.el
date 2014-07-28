@@ -1,9 +1,53 @@
-(defvar *go-helper-ws-base-path* "/Users/gslopsema/vagrant/llnw/go")
+;;; go-helper-mode.el --- Helper functions for navigating LLNW's Go structure
+
+;; Copyright (C) 2014 Gary Slopsema
+
+;; Author: Gary Slospema <gslopsema@gmail.com>
+;; Version: 20140728.1
+
+;; This file is NOT part of GNU Emacs.
+
+;; Permission is hereby granted, free of charge, to any person obtaining
+;; a copy of this software and associated documentation files (the
+;; "Software"), to deal in the Software without restriction, including
+;; without limitation the rights to use, copy, modify, merge, publish,
+;; distribute, sublicense, and/or sell copies of the Software, and to
+;; permit persons to whom the Software is furnished to do so, subject to
+;; the following conditions:
+;;
+;; The above copyright notice and this permission notice shall be
+;; included in all copies or substantial portions of the Software.
+;;
+;; THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+;; EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+;; MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+;; NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+;; LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+;; OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+;; WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+;;; Code:
+
+(defgroup go-helper nil
+  "Helper functions for navigating LLNW's Go structure"
+  :group 'go)
+
+(defcustom go-helper-ws-base-path "/Users/gslopsema/vagrant/llnw/go"
+  "Base workspace path (directory path which contains all your *-ws dirs)"
+  :type 'string
+  :group 'go-helper
+  :safe 'string)
+
+(defcustom go-root "/usr/local/go"
+  "GOROOT env variable"
+  :type 'string
+  :group 'go-helper
+  :safe 'string)
+
 (defvar *go-helper-current-ws* nil)
-(defvar *go-root* "/usr/local/go")
 
 (defun go-helper-ws-base-as-dir ()
-  (file-name-as-directory *go-helper-ws-base-path*))
+  (file-name-as-directory go-helper-ws-base-path))
 
 (defun update-gopath (gopath)
   (setenv "GOPATH" gopath))
@@ -24,7 +68,7 @@ to set this variable."
   (interactive "sRepo name (without '.git'): ")
   (if (null *go-helper-current-ws*)
       (message "No workspace set. Call go-helper-goto-workspace.")
-    (let* ((path-list `(,*go-helper-ws-base-path* ,*go-helper-current-ws* "src" "git.llnw.com" "lama"))
+    (let* ((path-list `(,go-helper-ws-base-path ,*go-helper-current-ws* "src" "git.llnw.com" "lama"))
            (base-dir (concat
                       (mapconcat 'file-name-as-directory path-list "")))
            (repo-name (concat repo ".git"))
@@ -79,7 +123,7 @@ to set this variable."
   "Helper for go interactions"
   :lighter " GoHelper"
   :keymap (go-helper-make-keymap)
-  (setenv "GOROOT" *go-root*))
+  (setenv "GOROOT" go-root))
 
 (define-globalized-minor-mode go-helper-global-mode
   go-helper-mode
