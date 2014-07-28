@@ -50,7 +50,7 @@
 			(local-set-key (kbd "C-c g r") 'go-run)
 			(local-set-key (kbd "C-c c") '(lambda ()
 											(interactive)
-											(command "go build")))
+											(shell-command "go build")))
 			(local-set-key (kbd "C-c t p") 'go-test-current-project)
 			(local-set-key (kbd "C-c t f") 'go-test-current-file)
 			(local-set-key (kbd "C-c t t") 'go-test-current-test)
