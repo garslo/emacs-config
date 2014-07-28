@@ -16,6 +16,9 @@ portions; these will cause some errors without configuration.
 Upon first run, Emacs will install those packages listed in
 `behavor/packages.el`.
 
+Also, change `go-tools-binary-path` to the workspace `bin/` directory
+containing your Go tools.
+
 ## Necessary tools for Go
 
 - `gocode`
