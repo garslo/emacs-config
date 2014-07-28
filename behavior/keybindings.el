@@ -28,3 +28,6 @@
 
 ;; A better find files
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+;; Spotify!
+(global-set-key (kbd "C-c m") 'helm-spotify)
