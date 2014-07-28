@@ -25,3 +25,6 @@
 
 ;; A handy popup
 (global-set-key (kbd "C-c h") 'helm-mini)
+
+;; A better find files
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
