@@ -30,6 +30,12 @@
                             (local-set-key (kbd "RET")
                                            'electrify-return-if-match)))
 
+;; git-gutter
+;;
+;; Adds gutter notations for what's changed since last commit
+;;
+(global-git-gutter-mode 1)
+
 ;; helm
 ;;
 ;; Better switching, searching
