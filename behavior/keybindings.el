@@ -35,4 +35,4 @@
 ;; Easier frame shortcuts
 (global-set-key (kbd "C-c f") 'make-frame-command)
 (global-set-key (kbd "C-c k") 'delete-frame)
-(global-set-key (kbd "C-c o") 'other-frame)
+(global-set-key (kbd "M-`") 'other-frame)
