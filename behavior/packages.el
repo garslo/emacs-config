@@ -3,6 +3,8 @@
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages"))
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
+(package-initialize)
+
 ;; make sure to have downloaded archive description.
 (or (file-exists-p package-user-dir)
     (package-refresh-contents))
@@ -21,9 +23,9 @@
  'go-play
  'go-projectile
  'go-eldoc
- 'go-snippets
  'gotest
  'go-mode
+ 'helm
  'f
  'magit
  'git-rebase-mode
@@ -35,6 +37,6 @@
  'epl
  'dash
  's
- 'yasnippet)
+)
 
-(package-initialize)
+;(package-initialize)
