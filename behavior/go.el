@@ -2,7 +2,7 @@
   "Customization and setup for go"
   :group 'go)
 
-(defcustom garslo-go-tool-workspace "~/go/go-tools-ws"
+(defcustom garslo-go-tool-workspace (expand-file-name "~/go/go-tools-ws")
   "Location of workspace containing go tools (like impl, oracle, etc.)"
   :type 'string
   :group 'garslo-go-customization
@@ -20,7 +20,7 @@
 (require 'auto-complete-config)
 
 ;; goimports is a better gofmt
-(setq gofmt-command "/Users/gslopsema/llnw/go/bin/goimports")
+(setq gofmt-command (garslo-go--path "bin/goimports"))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; oracle
@@ -33,10 +33,6 @@
 
 ;; ginkgo
 (require 'ginkgo-mode)
-
-;; golint
-(add-to-list 'load-path (garslo-go--path "src/github.com/golang/lint/misc/emacs"))
-(require 'golint)
 
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
