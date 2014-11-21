@@ -1,7 +1,7 @@
 ;; For graphical displays only...
 (when (display-graphic-p)
 ;; Best theme there is
-(load-theme 'solarized-dark)
+(load-theme 'wombat)
 ;; Remove the toolbar
 (tool-bar-mode -1)
 ;; Remove the scrollbar
