@@ -24,8 +24,8 @@
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; oracle
-(add-to-list 'load-path (garslo-go--path "src/code.google.com/p/go.tools/cmd/oracle"))
-(require 'go-oracle)
+;(add-to-list 'load-path (garslo-go--path "src/code.google.com/p/go.tools/cmd/oracle"))
+;(require 'go-oracle)
 
 ;; go-helper
 (require 'go-helper-mode)
