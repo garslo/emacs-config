@@ -50,16 +50,31 @@
   (file-name-as-directory go-helper-ws-base-path))
 
 (defun update-gopath (gopath)
-  (setenv "GOPATH" gopath))
+  (setenv "GOPATH" (expand-file-name gopath)))
+
+(defun go-helper-set-workspace (ws)
+  "Sets the go workspace, returns the path to the workspace"
+  (let* ((base-dir (go-helper-ws-base-as-dir))
+         (ws-dir (concat base-dir ws "-ws")))
+	(go-helper-set-workspace-raw ws-dir)
+    ;(setq *go-helper-current-ws* (concat ws "-ws"))
+    ;(update-gopath ws-dir)
+	ws-dir))
+
+(defun go-helper-set-workspace-raw (dir)
+  "Sets the workspace directly, without consulting go-helper-ws-base-path"
+  (setq *go-helper-current-ws* dir)
+  (update-gopath dir))
+
+(defun go-helper-set-pwd-as-workspace ()
+  "Sets pwd as the current workspace"
+  (interactive)
+  (go-helper-set-workspace-raw default-directory))
 
 (defun go-helper-goto-workspace (ws)
   "Opens a dired directory in the given workspace."
   (interactive "sWorkspace name (without '-ws'): ")
-  (let* ((base-dir (go-helper-ws-base-as-dir))
-         (ws-dir (concat base-dir ws "-ws")))
-    (setq *go-helper-current-ws* (concat ws "-ws"))
-    (update-gopath ws-dir)
-    (find-file ws-dir)))
+  (find-file (go-helper-set-workspace ws)))
 
 (defun go-helper-goto-repo (repo)
   "Opens a dired directory in the given repo. This requires
@@ -68,7 +83,7 @@ to set this variable."
   (interactive "sRepo name (without '.git'): ")
   (if (null *go-helper-current-ws*)
       (message "No workspace set. Call go-helper-goto-workspace.")
-    (let* ((path-list `(,go-helper-ws-base-path ,*go-helper-current-ws* "src" "git.llnw.com" "lama"))
+    (let* ((path-list `(,(getenv "GOPATH") "src" "git.llnw.com" "lama"))
            (base-dir (concat
                       (mapconcat 'file-name-as-directory path-list "")))
            (repo-name (concat repo ".git"))
@@ -78,16 +93,16 @@ to set this variable."
 
 (defun go-helper-set-oracle-scope ()
   (interactive)
-  (let* ((gopath (getenv "GOPATH"))
+  (let* ((gopath (expand-file-name (getenv "GOPATH")))
         (repo-dir (expand-file-name default-directory))
         (current-package (go-helper-path-subtract gopath repo-dir)))
-    (setq go-oracle-scope current-package)
+    (setq go-oracle-scope repo-dir)
     (message "Oracle scope: %s" current-package)))
 
 (defun go-helper-set-gocode-lib-path ()
   (interactive)
   (let* ((gopath (getenv "GOPATH"))
-         (command-string (format "gocode set lib-path \"%s/pkg/linux_amd64\"" gopath)))
+         (command-string (format "gocode set lib-path \"%spkg/linux_amd64\"" (expand-file-name gopath))))
     (shell-command command-string)))
 
 (defun go-helper-install-subpackages ()
@@ -98,7 +113,7 @@ to set this variable."
 (defun go-helper-path-subtract (base child)
   (if (not (go-helper-is-subdir base child))
       (message "%s is not a subdir of %s" child base)
-    (let* ((start-idx (+ (length base) 5))
+    (let ((start-idx (+ (length base) 4))
            (end-idx (- (length child) 1)))
       (substring child start-idx end-idx))))
 
@@ -114,6 +129,7 @@ to set this variable."
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c r") 'go-helper-goto-repo)
     (define-key map (kbd "C-c w") 'go-helper-goto-workspace)
+	(define-key map (kbd "C-c sw") 'go-helper-set-pwd-as-workspace)
     (define-key map (kbd "C-c ss") 'go-helper-set-oracle-scope)
     (define-key map (kbd "C-c sg") 'go-helper-set-gocode-lib-path)
     (define-key map (kbd "C-c is") 'go-helper-install-subpackages)
