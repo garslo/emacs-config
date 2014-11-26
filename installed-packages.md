@@ -1,6 +1,7 @@
 # Installed
   auto-complete
   dash
+  dockerfile-mode
   epl
   f
   fringe-helper
@@ -9,6 +10,7 @@
   git-gutter-fringe
   git-rebase-mode
   go-autocomplete
+  go-direx
   go-eldoc
   go-errcheck
   go-mode
@@ -26,4 +28,5 @@
   popup
   projectile
   s
+  yaml-mode
   yasnippet
