@@ -37,6 +37,9 @@
  'epl
  'dash
  's
+ 'dockerfile-mode
+ 'go-direx
+ 'yaml-mode
 )
 
 ;(package-initialize)
