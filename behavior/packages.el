@@ -16,6 +16,7 @@
  'markdown-mode
  'git-gutter-fringe
  'fringe-helper
+ 'flycheck
  'git-gutter
  'go-autocomplete
  'auto-complete
