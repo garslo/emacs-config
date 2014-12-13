@@ -38,8 +38,6 @@
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
                           (ginkgo-mode)
-						  (flycheck-mode)
-;                          (go-oracle-mode t)
 						  ))
 
 ;;;; Keybindings

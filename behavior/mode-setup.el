@@ -44,7 +44,7 @@
 ;;
 ;; Adds gutter notations for what's changed since last commit
 ;;
-(global-git-gutter-mode 1)
+;(global-git-gutter-mode 1)
 
 ;; helm
 ;;
