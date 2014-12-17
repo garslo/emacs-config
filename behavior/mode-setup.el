@@ -52,6 +52,13 @@
 ;;
 (helm-mode 1)
 
+;; jedi
+;;
+;; Autocomplete in python
+;;
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
+
 ;; linum
 ;;
 ;; View line numbers when in a programmatic mode

@@ -41,6 +41,7 @@
  'dockerfile-mode
  'go-direx
  'yaml-mode
+ 'jedi
 )
 
 ;(package-initialize)
