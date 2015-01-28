@@ -71,6 +71,10 @@
 			(linum-mode 1)  			; Add line numbers
 			(orgtbl-mode 1)))			; Add beautiful ascii table support
 
+;; multiple-cursors
+;;
+(require 'multiple-cursors)
+
 ;; paredit
 ;;
 ;; Wonderful lispy settings

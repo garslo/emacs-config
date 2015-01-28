@@ -42,6 +42,7 @@
  'go-direx
  'yaml-mode
  'jedi
+ 'multiple-cursors
 )
 
 ;(package-initialize)
