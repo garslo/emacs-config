@@ -36,3 +36,8 @@
 (global-set-key (kbd "C-c f") 'make-frame-command)
 (global-set-key (kbd "C-c k") 'delete-frame)
 (global-set-key (kbd "M-`") 'other-frame)
+
+;; multiple-cursors
+(global-set-key (kbd "C-c .") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c ,") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-_") 'mc/mark-all-like-this)

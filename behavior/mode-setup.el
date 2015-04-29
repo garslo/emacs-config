@@ -5,6 +5,16 @@
 (require 'auto-complete)
 (global-auto-complete-mode)
 
+;; eshell
+(require 'eshell)
+(require 'em-smart)
+(setq eshell-review-quick-commands nil)
+(setq eshell-smart-space-goes-to-end t)
+(add-hook 'eshell-mode-hook
+		  (lambda ()
+			(eshell-smart-initialize)))
+
+
 ;; gutter
 ;;
 ;; Adds git hints to "gutter"
@@ -34,7 +44,7 @@
 ;;
 ;; Adds gutter notations for what's changed since last commit
 ;;
-(global-git-gutter-mode 1)
+;(global-git-gutter-mode 1)
 
 ;; helm
 ;;
@@ -42,6 +52,13 @@
 ;;
 (helm-mode 1)
 (setq helm-ff-newfile-prompt-p nil)
+
+;; jedi
+;;
+;; Autocomplete in python
+;;
+(add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 
 ;; linum
 ;;
@@ -54,6 +71,10 @@
 		  (lambda ()
 			(linum-mode 1)  			; Add line numbers
 			(orgtbl-mode 1)))			; Add beautiful ascii table support
+
+;; multiple-cursors
+;;
+(require 'multiple-cursors)
 
 ;; paredit
 ;;

@@ -16,6 +16,7 @@
  'markdown-mode
  'git-gutter-fringe
  'fringe-helper
+ 'flycheck
  'git-gutter
  'go-autocomplete
  'auto-complete
@@ -37,6 +38,11 @@
  'epl
  'dash
  's
+ 'dockerfile-mode
+ 'go-direx
+ 'yaml-mode
+ 'jedi
+ 'multiple-cursors
 )
 
 ;(package-initialize)
