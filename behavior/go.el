@@ -26,6 +26,7 @@
 ;; oracle
 ;(add-to-list 'load-path (garslo-go--path "src/code.google.com/p/go.tools/cmd/oracle"))
 ;(require 'go-oracle)
+(defun go-oracle-mode (x) nil)
 
 ;; go-helper
 (require 'go-helper-mode)

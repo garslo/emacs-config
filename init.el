@@ -22,7 +22,8 @@
 		  (load "keybindings")
 		  (load "go")
 		  (load "go-helper-mode")
-		  (load "ginkgo-mode")))
+		  (load "ginkgo-mode")
+		  (load "go-autocomplete")))
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)
