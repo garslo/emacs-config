@@ -40,6 +40,11 @@
                             (local-set-key (kbd "RET")
                                            'electrify-return-if-match)))
 
+;; git
+(add-hook 'git-commit-mode-hook
+		  (lambda ()
+			(local-set-key (kbd "C-c g v") 'git-get-version)))
+
 ;; git-gutter
 ;;
 ;; Adds gutter notations for what's changed since last commit
