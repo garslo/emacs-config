@@ -43,6 +43,7 @@
  'yaml-mode
  'jedi
  'multiple-cursors
+ 'haskell-mode
 )
 
 ;(package-initialize)

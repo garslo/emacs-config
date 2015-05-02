@@ -58,6 +58,9 @@
 (helm-mode 1)
 (setq helm-ff-newfile-prompt-p nil)
 
+;; haskell
+(add-to-list 'haskell-mode-hook 'turn-on-haskell-indent)
+
 ;; jedi
 ;;
 ;; Autocomplete in python
