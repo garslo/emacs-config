@@ -59,7 +59,7 @@
 (setq helm-ff-newfile-prompt-p nil)
 
 ;; haskell
-(add-to-list 'haskell-mode-hook 'turn-on-haskell-indent)
+;(add-to-list 'haskell-mode-hook 'turn-on-haskell-indent)
 
 ;; jedi
 ;;
