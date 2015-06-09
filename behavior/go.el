@@ -2,7 +2,7 @@
   "Customization and setup for go"
   :group 'go)
 
-(defcustom garslo-go-tool-workspace (expand-file-name "~/go/go-tools-ws")
+(defcustom garslo-go-tool-workspace (expand-file-name "/usr")
   "Location of workspace containing go tools (like impl, oracle, etc.)"
   :type 'string
   :group 'garslo-go-customization
@@ -26,6 +26,7 @@
 ;; oracle
 ;(add-to-list 'load-path (garslo-go--path "src/code.google.com/p/go.tools/cmd/oracle"))
 ;(require 'go-oracle)
+(defun go-oracle-mode (x) nil)
 
 ;; go-helper
 (require 'go-helper-mode)

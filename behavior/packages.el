@@ -44,6 +44,7 @@
  'jedi
  'multiple-cursors
  'slime
+ 'haskell-mode
 )
 
 ;(package-initialize)

@@ -54,3 +54,7 @@ Return a list of installed packages or nil for every skipped package."
            (package-install package)
          package)))
    packages))
+
+(defun git-get-version ()
+  (interactive)
+  (insert (magit-git-string "describe" "--tags")))
