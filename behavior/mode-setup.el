@@ -56,7 +56,9 @@
 ;;
 ;; Autocomplete in python
 ;;
-(add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook (lambda ()
+							  (jedi:setup)
+							  (local-set-key (kbd "C-c c") 'py-autopep8)))
 (setq jedi:complete-on-dot t)
 
 ;; linum
@@ -93,6 +95,11 @@
 ;;;; #REQUIRES: projectile
 (projectile-global-mode 1)
 (setq projectile-enable-caching t)
+
+;;
+;; slime
+;;
+(setq inferior-lisp-program "/usr/bin/clisp")
 
 ;; subword
 ;;

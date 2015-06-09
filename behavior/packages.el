@@ -43,6 +43,7 @@
  'yaml-mode
  'jedi
  'multiple-cursors
+ 'slime
 )
 
 ;(package-initialize)
