@@ -44,4 +44,4 @@
 
 ;; avy
 (global-set-key (kbd "C-c ;") 'avy-goto-word-1)
-(global-set-key (kbd "C-c '") 'avy-goto-char-2)
+(global-set-key (kbd "C-c '") 'avy-goto-char)
