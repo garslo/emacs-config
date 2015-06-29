@@ -45,6 +45,7 @@
  'multiple-cursors
  'slime
  'haskell-mode
+ 'avy
 )
 
 ;(package-initialize)

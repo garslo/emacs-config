@@ -41,3 +41,6 @@
 (global-set-key (kbd "C-c .") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-c ,") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-_") 'mc/mark-all-like-this)
+
+;; avy
+(global-set-key (kbd "C-c ;") 'avy-goto-char-2)

@@ -65,7 +65,7 @@
 ;  "Go reserved keywords.")
 
 (defun ac-comphist-sort (db collection prefix &optional threshold)
-;; redefine to disable sorting
+  ;; redefine to disable sorting
   (let (result
         (n 0)
         (total 0)
@@ -78,10 +78,10 @@
                                (incf cur (cdr a))))
                            (car a))
                          (mapcar (lambda (string)
-												   (let ((score (ac-comphist-score db string prefix)))
-												   								        (incf total score)
-																										     (cons string score)))
-																											 	   		    collection)))
+								   (let ((score (ac-comphist-score db string prefix)))
+									 (incf total score)
+									 (cons string score)))
+								 collection)))
     (if threshold
         (cons n result)
       result)))

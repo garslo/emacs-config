@@ -15,6 +15,10 @@
 			(eshell-smart-initialize)))
 
 
+;; ess
+(setq ess-toggle-underscore nil)
+(setq ess-toggle-underscore nil)
+
 ;; gutter
 ;;
 ;; Adds git hints to "gutter"
@@ -96,6 +100,8 @@
   (eldoc-mode 1))
 (add-hook 'emacs-lisp-mode-hook 'my-lispy-settings)
 (add-hook 'inferior-emacs-lisp-mode-hook 'my-lispy-settings)
+(add-hook 'lisp-mode-hook 'my-lispy-settings)
+(add-to-list 'auto-mode-alist '("\\.gsp\\'" . lisp-mode))
 
 ;; projectile
 ;;
