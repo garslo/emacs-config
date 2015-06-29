@@ -43,4 +43,4 @@
 (global-set-key (kbd "C-c C-_") 'mc/mark-all-like-this)
 
 ;; avy
-(global-set-key (kbd "C-c ;") 'avy-goto-char-2)
+(global-set-key (kbd "C-c ;") 'avy-goto-word-1)
