@@ -32,7 +32,7 @@
   "Helper functions for navigating LLNW's Go structure"
   :group 'go)
 
-(defcustom go-helper-ws-base-path "/Users/gslopsema/vagrant/llnw/go"
+(defcustom go-helper-ws-base-path (expand-file-name "~/dev/llnw")
   "Base workspace path (directory path which contains all your *-ws dirs)"
   :type 'string
   :group 'go-helper
@@ -40,6 +40,12 @@
 
 (defcustom go-root "/usr/local/go"
   "GOROOT env variable"
+  :type 'string
+  :group 'go-helper
+  :safe 'string)
+
+(defcustom go-ginkgo-output-buffer "*ginkgo-output*"
+  "Buffer to show ginkgo output"
   :type 'string
   :group 'go-helper
   :safe 'string)
@@ -57,9 +63,7 @@
   (let* ((base-dir (go-helper-ws-base-as-dir))
          (ws-dir (concat base-dir ws "-ws")))
 	(go-helper-set-workspace-raw ws-dir)
-    ;(setq *go-helper-current-ws* (concat ws "-ws"))
-    ;(update-gopath ws-dir)
-	ws-dir))
+    ws-dir))
 
 (defun go-helper-set-workspace-raw (dir)
   "Sets the workspace directly, without consulting go-helper-ws-base-path"
@@ -124,6 +128,52 @@ to set this variable."
       (equal base
          (substring child 0 base-len)))))
 
+(defvar go-helper-test-dir ""
+  "Directory where we run the ginkgo tests from")
+
+(defun go-helper-set-test-dir ()
+  "Sets `ginkgo-test-dir' equal to the current directory"
+  (interactive)
+  (setq go-helper-test-dir (go-helper-prompt))
+  (message "go-helper-test-dir is %s" go-helper-test-dir))
+
+(defun go-helper-get-test-dir ()
+  (if (string= "" go-helper-test-dir)
+	  (setq go-helper-test-dir (go-helper-prompt))
+	go-helper-test-dir))
+
+(defun go-helper-prompt ()
+  (read-file-name "Ginkgo dir: "))
+
+(defun go-helper-run-ginkgo-with-args (&rest args)
+  (let ((curdir default-directory))
+	(message "ginkgo args %s in dir %s" args (go-helper-get-test-dir))
+	(cd go-helper-test-dir)
+	(pop-to-buffer go-ginkgo-output-buffer)
+	(erase-buffer)
+	(other-window 1)
+	(apply 'start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" args)
+	(cd curdir)))
+
+;; (regexp-opt '("It(" "Context(" "Describe("))
+(defconst *ginkgo-containers-regexp* "\\(?:\\(?:Context\\|Describe\\|It\\)(\\)")
+
+(defun go-helper-run-ginkgo ()
+  (interactive)
+  (go-helper-run-ginkgo-with-args "-noColor"))
+
+(defun go-helper-run-ginkgo-on-this-block ()
+  (interactive)
+  (save-excursion
+	(while (not (looking-at *ginkgo-containers-regexp*))
+	  (backward-char))
+	(let ((start nil)
+		  (end nil))
+	 (search-forward "\"")
+	 (setq start (point))
+	 (search-forward "\"")
+	 (setq end (- (point) 1))
+	 (go-helper-run-ginkgo-with-args "-noColor" "-focus"  (buffer-substring-no-properties start end)))))
 
 (defun go-helper-make-keymap ()
   (let ((map (make-sparse-keymap)))
@@ -133,6 +183,11 @@ to set this variable."
     (define-key map (kbd "C-c ss") 'go-helper-set-oracle-scope)
     (define-key map (kbd "C-c sg") 'go-helper-set-gocode-lib-path)
     (define-key map (kbd "C-c is") 'go-helper-install-subpackages)
+	(define-key map (kbd "C-c st") 'go-helper-set-test-dir)
+	(define-key map (kbd "C-c C-t") 'go-helper-run-ginkgo)
+	(define-key map (kbd "C-c st") 'go-helper-set-test-dir)
+	(define-key map (kbd "C-c tt") 'go-helper-run-ginkgo-on-this-block)
+	(define-key map (kbd "C-c ta") 'go-helper-run-ginkgo)
     map))
 
 (define-minor-mode go-helper-mode

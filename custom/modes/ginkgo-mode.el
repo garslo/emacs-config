@@ -28,6 +28,26 @@
 
 ;;; Code:
 
+(defgroup ginkgo nil
+  "Group for configuring ginkgo minor mode"
+  :group 'go)
+
+
+(defun ginkgo-set-test-dir ()
+  "Sets `ginkgo-test-dir' equal to the current directory"
+  (interactive)
+  (setq ginkgo-set-test-dir default-directory))
+
+(defun ginkgo-run-tests ()
+  (interactive)
+  (let ((curdir default-directory))
+	(cd ginkgo-test-dir)
+	(pop-to-buffer go-ginkgo-output-buffer)
+	(erase-buffer)
+	(other-window 1)
+	(start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" "-noColor")
+	(cd curdir)))
+
 (defun ginkgo-move-backward-until-regexp-with-action (regexp action)
   (save-excursion
     (while (not (looking-at regexp))
@@ -59,8 +79,7 @@
 
 (defun ginkgo-toggle-container-pending ()
   (interactive)
-  (ginkgo-toggle-container-char-prefix ?\P)
-  )
+  (ginkgo-toggle-container-char-prefix ?\P))
 
 (defun ginkgo-make-keymap ()
   (let ((map (make-sparse-keymap)))
