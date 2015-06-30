@@ -152,7 +152,14 @@ to set this variable."
 	(pop-to-buffer go-ginkgo-output-buffer)
 	(erase-buffer)
 	(other-window 1)
-	(apply 'start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" args)
+	(let ((proc (apply 'start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" args)))
+	  (set-process-filter proc (lambda (proc output)
+							(with-current-buffer (process-buffer proc)
+							  (save-excursion
+								(goto-char (process-mark proc))
+								(insert output)
+								(ansi-color-apply-on-region (point-min) (point-max))
+								(set-marker (process-mark proc) (point)))))))
 	(cd curdir)))
 
 ;; (regexp-opt '("It(" "Context(" "Describe("))
@@ -173,7 +180,7 @@ to set this variable."
 	 (setq start (point))
 	 (search-forward "\"")
 	 (setq end (- (point) 1))
-	 (go-helper-run-ginkgo-with-args "-noColor" "-focus"  (buffer-substring-no-properties start end)))))
+	 (go-helper-run-ginkgo-with-args "-focus"  (buffer-substring-no-properties start end)))))
 
 (defun go-helper-make-keymap ()
   (let ((map (make-sparse-keymap)))
