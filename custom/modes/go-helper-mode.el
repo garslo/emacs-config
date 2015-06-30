@@ -146,28 +146,30 @@ to set this variable."
   (read-file-name "Ginkgo dir: "))
 
 (defun go-helper-run-ginkgo-with-args (&rest args)
-  (let ((curdir default-directory))
-	(message "ginkgo args %s in dir %s" args (go-helper-get-test-dir))
+  (message "ginkgo args %s in dir %s" args (go-helper-get-test-dir))
 	(cd go-helper-test-dir)
 	(pop-to-buffer go-ginkgo-output-buffer)
 	(erase-buffer)
 	(other-window 1)
 	(let ((proc (apply 'start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" args)))
-	  (set-process-filter proc (lambda (proc output)
-							(with-current-buffer (process-buffer proc)
-							  (save-excursion
-								(goto-char (process-mark proc))
-								(insert output)
-								(ansi-color-apply-on-region (point-min) (point-max))
-								(set-marker (process-mark proc) (point)))))))
-	(cd curdir)))
+	  (set-process-filter
+	   proc
+	   (lambda (proc output)
+		 (with-current-buffer (process-buffer proc)
+		   (let ((moving (= (point) (process-mark proc))))
+			 (save-excursion
+			   (goto-char (process-mark proc))
+			   (insert output)
+			   (ansi-color-apply-on-region (point-min) (point-max))
+			   (set-marker (process-mark proc) (point)))
+			 (if moving (goto-char (process-mark proc)))))))))
 
 ;; (regexp-opt '("It(" "Context(" "Describe("))
 (defconst *ginkgo-containers-regexp* "\\(?:\\(?:Context\\|Describe\\|It\\)(\\)")
 
 (defun go-helper-run-ginkgo ()
   (interactive)
-  (go-helper-run-ginkgo-with-args "-noColor"))
+  (go-helper-run-ginkgo-with-args))
 
 (defun go-helper-run-ginkgo-on-this-block ()
   (interactive)
