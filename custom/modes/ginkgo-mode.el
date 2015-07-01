@@ -32,67 +32,100 @@
   "Group for configuring ginkgo minor mode"
   :group 'go)
 
-
-(defun ginkgo-set-test-dir ()
-  "Sets `ginkgo-test-dir' equal to the current directory"
-  (interactive)
-  (setq ginkgo-set-test-dir default-directory))
-
-(defun ginkgo-run-tests ()
-  (interactive)
-  (let ((curdir default-directory))
-	(cd ginkgo-test-dir)
-	(pop-to-buffer go-ginkgo-output-buffer)
-	(erase-buffer)
-	(other-window 1)
-	(start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" "-noColor")
-	(cd curdir)))
-
-(defun ginkgo-move-backward-until-regexp-with-action (regexp action)
-  (save-excursion
-    (while (not (looking-at regexp))
-      (backward-char))
-    (funcall action)))
+(defcustom ginkgo-output-buffer "*ginkgo-output*"
+  "Buffer to show ginkgo output"
+  :type 'string
+  :group 'ginkgo
+  :safe 'string)
 
 ;; (regexp-opt '("It(" "Context(" "Describe("))
-(defconst *ginkgo-containers-regexp* "\\(?:\\(?:Context\\|Describe\\|It\\)(\\)")
+(defcustom ginkgo-containers-regexp "\\(?:\\(?:Context\\|Describe\\|It\\)(\\)"
+  "Regexp to recognize ginkgo containers"
+  :type 'string
+  :group 'ginkgo
+  :safe 'string)
 
-(defun ginkgo-toggle-container-char-prefix (ch)
+(defvar ginkgo-test-dir ""
+  "Location to run gingko tests")
+
+(defvar ginkgo--last-focus ""
+    "Holds the description of the last test that was run")
+
+(defun ginkgo--prompt ()
+  (read-file-name "Ginko dir: "))
+
+(defun ginkgo--get-test-dir ()
+  (if (string= "" ginkgo-test-dir)
+	  (setq ginkgo-test-dir (ginkgo--prompt))
+	ginkgo-test-dir))
+
+(defun ginkgo-set-test-dir ()
+  "Sets `ginkgo-test-dir'"
+  (interactive)
+  (setq ginkgo-test-dir (go-helper-prompt))
+  (message "ginkgo-test-dir is %s" ginkgo-test-dir))
+
+(defun ginkgo--colorize-output (proc output)
+  (with-current-buffer (process-buffer proc)
+	(let ((moving (= (point) (process-mark proc))))
+	  (save-excursion
+		(goto-char (process-mark proc))
+		(insert output)
+		(ansi-color-apply-on-region (point-min) (point-max))
+		(set-marker (process-mark proc) (point)))
+	  (if moving (goto-char (process-mark proc)))))
+  )
+
+(defun ginkgo--run (&rest args)
+  (let ((curdir default-directory))
+	(message "Running \"ginkgo %s\" in dir %s" args (ginkgo--get-test-dir))
+	(cd ginkgo-test-dir)
+	(pop-to-buffer ginkgo-output-buffer)
+	(erase-buffer)
+	(other-window 1)
+	(let ((proc (apply 'start-process "ginkgo" ginkgo-output-buffer "ginkgo" args)))
+	  (set-process-filter proc 'ginkgo--colorize-output))
+	(cd curdir)))
+
+(defun ginkgo-run-all ()
+  (interactive)
+  (ginkgo--run))
+
+(defun ginkgo-run-this-container ()
+  (interactive)
   (save-excursion
-    (let ((done nil))
-      (while (not done)
-        (if (looking-at *ginkgo-containers-regexp*)
-            (progn
-              (if (eq (char-before) ch)
-                  (delete-char -1)
-                 (insert-char ch))
-              (setq done t)))
-        (backward-char)))))
+	(while (not (looking-at ginkgo-containers-regexp))
+	  (backward-char))
+	(let ((start nil)
+		  (end nil))
+	  (search-forward "\"")
+	  (setq start (point))
+	  (search-forward "\"")
+	  (setq end (- (point) 1))
+	  (let ((focus (buffer-substring-no-properties start end)))
+		(setq ginkgo--last-focus focus)
+		(ginkgo--run "-focus" focus)))))
 
-(defun my-chbef ()
+(defun ginkgo-run-last ()
   (interactive)
-  (message (eq (char-before) ?\F)))
+  (if (string= "" ginkgo--last-focus)
+	  (message "No focus string is stored")
+	(ginkgo--run "-focus" ginkgo--last-focus)))
 
-(defun ginkgo-toggle-container-focus ()
-  (interactive)
-  (ginkgo-toggle-container-char-prefix ?\F))
-
-(defun ginkgo-toggle-container-pending ()
-  (interactive)
-  (ginkgo-toggle-container-char-prefix ?\P))
-
-(defun ginkgo-make-keymap ()
+(defun ginkgo--make-keymap ()
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c g f") 'ginkgo-toggle-container-focus)
-    (define-key map (kbd "C-c g p") 'ginkgo-toggle-container-pending)
-    map))
+	(define-key map (kbd "C-c st") 'ginkgo-set-test-dir)
+	(define-key map (kbd "C-c ta") 'ginkgo-run-all)
+	(define-key map (kbd "C-c tt") 'ginkgo-run-this-container)
+	(define-key map (kbd "C-c tl") 'ginkgo-run-last)
+	map))
 
 (define-minor-mode ginkgo-mode
-  "Helper for go interactions. We define the following bindings:
-
-    C-c g f        ginkgo-toggle-container-focus
-    C-c g p        ginkgo-toggle-container-pending"
+  "Minor mode for ginkgo"
   :lighter " Ginkgo"
-  :keymap (ginkgo-make-keymap))
+  :keymap (ginkgo--make-keymap))
+
+(defun ginkgo-mode-on ()
+  (ginkgo-mode 1))
 
 (provide 'ginkgo-mode)

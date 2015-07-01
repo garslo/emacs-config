@@ -44,12 +44,6 @@
   :group 'go-helper
   :safe 'string)
 
-(defcustom go-ginkgo-output-buffer "*ginkgo-output*"
-  "Buffer to show ginkgo output"
-  :type 'string
-  :group 'go-helper
-  :safe 'string)
-
 (defvar *go-helper-current-ws* nil)
 
 (defun go-helper-ws-base-as-dir ()
@@ -128,76 +122,6 @@ to set this variable."
       (equal base
          (substring child 0 base-len)))))
 
-(defvar go-helper-test-dir ""
-  "Directory where we run the ginkgo tests from")
-
-(defvar go-helper-last-focus ""
-  "Holds the description of the last test that was run")
-
-(defun go-helper-ginkgo-run-last ()
-  "Runs the most recently run test again"
-  (interactive)
-  (if (string= "" go-helper-last-focus)
-	  (message "No focus string is stored")
-	(go-helper-run-ginkgo-with-args "-focus" go-helper-last-focus)))
-
-(defun go-helper-set-test-dir ()
-  "Sets `ginkgo-test-dir' equal to the current directory"
-  (interactive)
-  (setq go-helper-test-dir (go-helper-prompt))
-  (message "go-helper-test-dir is %s" go-helper-test-dir))
-
-(defun go-helper-get-test-dir ()
-  (if (string= "" go-helper-test-dir)
-	  (setq go-helper-test-dir (go-helper-prompt))
-	go-helper-test-dir))
-
-(defun go-helper-prompt ()
-  (read-file-name "Ginkgo dir: "))
-
-(defun go-helper-ginkgo-colorize-output (proc output)
-  (with-current-buffer (process-buffer proc)
-		   (let ((moving (= (point) (process-mark proc))))
-			 (save-excursion
-			   (goto-char (process-mark proc))
-			   (insert output)
-			   (ansi-color-apply-on-region (point-min) (point-max))
-			   (set-marker (process-mark proc) (point)))
-			 (if moving (goto-char (process-mark proc))))))
-
-(defun go-helper-run-ginkgo-with-args (&rest args)
-  (let ((curdir default-directory))
-	(message "ginkgo args %s in dir %s" args (go-helper-get-test-dir))
-	(cd go-helper-test-dir)
-	(pop-to-buffer go-ginkgo-output-buffer)
-	(erase-buffer)
-	(other-window 1)
-	(let ((proc (apply 'start-process "ginkgo" go-ginkgo-output-buffer "ginkgo" args)))
-	  (set-process-filter proc 'go-helper-ginkgo-colorize-output))
-	(cd curdir)))
-
-;; (regexp-opt '("It(" "Context(" "Describe("))
-(defconst *ginkgo-containers-regexp* "\\(?:\\(?:Context\\|Describe\\|It\\)(\\)")
-
-(defun go-helper-run-ginkgo ()
-  (interactive)
-  (go-helper-run-ginkgo-with-args))
-
-(defun go-helper-run-ginkgo-on-this-block ()
-  (interactive)
-  (save-excursion
-	(while (not (looking-at *ginkgo-containers-regexp*))
-	  (backward-char))
-	(let ((start nil)
-		  (end nil))
-	 (search-forward "\"")
-	 (setq start (point))
-	 (search-forward "\"")
-	 (setq end (- (point) 1))
-	 (let ((focus (buffer-substring-no-properties start end)))
-	   (setq go-helper-last-focus focus)
-	   (go-helper-run-ginkgo-with-args "-focus" focus)))))
-
 (defun go-helper-make-keymap ()
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c r") 'go-helper-goto-repo)
@@ -206,12 +130,6 @@ to set this variable."
     (define-key map (kbd "C-c ss") 'go-helper-set-oracle-scope)
     (define-key map (kbd "C-c sg") 'go-helper-set-gocode-lib-path)
     (define-key map (kbd "C-c is") 'go-helper-install-subpackages)
-	(define-key map (kbd "C-c st") 'go-helper-set-test-dir)
-	(define-key map (kbd "C-c C-t") 'go-helper-run-ginkgo)
-	(define-key map (kbd "C-c st") 'go-helper-set-test-dir)
-	(define-key map (kbd "C-c tt") 'go-helper-run-ginkgo-on-this-block)
-	(define-key map (kbd "C-c ta") 'go-helper-run-ginkgo)
-	(define-key map (kbd "C-c tl") 'go-helper-ginkgo-run-last)
     map))
 
 (define-minor-mode go-helper-mode
