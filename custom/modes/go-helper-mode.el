@@ -131,6 +131,16 @@ to set this variable."
 (defvar go-helper-test-dir ""
   "Directory where we run the ginkgo tests from")
 
+(defvar go-helper-last-focus ""
+  "Holds the description of the last test that was run")
+
+(defun go-helper-ginkgo-run-last ()
+  "Runs the most recently run test again"
+  (interactive)
+  (if (string= "" go-helper-last-focus)
+	  (message "No focus string is stored")
+	(go-helper-run-ginkgo-with-args "-focus" go-helper-last-focus)))
+
 (defun go-helper-set-test-dir ()
   "Sets `ginkgo-test-dir' equal to the current directory"
   (interactive)
@@ -184,7 +194,9 @@ to set this variable."
 	 (setq start (point))
 	 (search-forward "\"")
 	 (setq end (- (point) 1))
-	 (go-helper-run-ginkgo-with-args "-focus"  (buffer-substring-no-properties start end)))))
+	 (let ((focus (buffer-substring-no-properties start end)))
+	   (setq go-helper-last-focus focus)
+	   (go-helper-run-ginkgo-with-args "-focus" focus)))))
 
 (defun go-helper-make-keymap ()
   (let ((map (make-sparse-keymap)))
@@ -199,6 +211,7 @@ to set this variable."
 	(define-key map (kbd "C-c st") 'go-helper-set-test-dir)
 	(define-key map (kbd "C-c tt") 'go-helper-run-ginkgo-on-this-block)
 	(define-key map (kbd "C-c ta") 'go-helper-run-ginkgo)
+	(define-key map (kbd "C-c tl") 'go-helper-ginkgo-run-last)
     map))
 
 (define-minor-mode go-helper-mode
