@@ -45,6 +45,12 @@
   :group 'ginkgo
   :safe 'string)
 
+(defcustom ginkgo-binary "ginkgo"
+  "Name/location of ginkgo binary"
+  :type 'string
+  :group 'ginkgo
+  :safe 'string)
+
 (defvar ginkgo-test-dir ""
   "Location to run gingko tests")
 
@@ -65,17 +71,6 @@
   (setq ginkgo-test-dir (go-helper-prompt))
   (message "ginkgo-test-dir is %s" ginkgo-test-dir))
 
-(defun ginkgo--colorize-output (proc output)
-  (with-current-buffer (process-buffer proc)
-	(let ((moving (= (point) (process-mark proc))))
-	  (save-excursion
-		(goto-char (process-mark proc))
-		(insert output)
-		(ansi-color-apply-on-region (point-min) (point-max))
-		(set-marker (process-mark proc) (point)))
-	  (if moving (goto-char (process-mark proc)))))
-  )
-
 (defun ginkgo--run (&rest args)
   (let ((curdir default-directory))
 	(message "Running \"ginkgo %s\" in dir %s" args (ginkgo--get-test-dir))
@@ -83,8 +78,7 @@
 	(pop-to-buffer ginkgo-output-buffer)
 	(erase-buffer)
 	(other-window 1)
-	(let ((proc (apply 'start-process "ginkgo" ginkgo-output-buffer "ginkgo" args)))
-	  (set-process-filter proc 'ginkgo--colorize-output))
+	(apply 'make-comint-in-buffer "ginkgo" ginkgo-output-buffer ginkgo-binary nil args)
 	(cd curdir)))
 
 (defun ginkgo-run-all ()
