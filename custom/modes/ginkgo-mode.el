@@ -51,6 +51,9 @@
   :group 'ginkgo
   :safe 'string)
 
+(defvar ginkgo-use-pwd-as-test-dir nil
+  "Always use the current working directory as the test directory")
+
 (defvar ginkgo-test-dir ""
   "Location to run gingko tests")
 
@@ -61,20 +64,23 @@
   (read-file-name "Ginko dir: "))
 
 (defun ginkgo--get-test-dir ()
-  (if (string= "" ginkgo-test-dir)
-	  (setq ginkgo-test-dir (ginkgo--prompt))
-	ginkgo-test-dir))
+  (cond
+   (ginkgo-use-pwd-as-test-dir default-directory)
+   ((string= "" ginkgo-test-dir) (setq ginkgo-test-dir (ginkgo--prompt)))
+   (t ginkgo-test-dir)))
 
 (defun ginkgo-set-test-dir ()
   "Sets `ginkgo-test-dir'"
   (interactive)
-  (setq ginkgo-test-dir (go-helper-prompt))
+  (setq ginkgo-test-dir (ginkgo--prompt))
   (message "ginkgo-test-dir is %s" ginkgo-test-dir))
 
 (defun ginkgo--run (&rest args)
   (let ((curdir default-directory))
 	(message "Running \"ginkgo %s\" in dir %s" args (ginkgo--get-test-dir))
 	(cd ginkgo-test-dir)
+	(if (get-buffer ginkgo-output-buffer)
+		(kill-buffer ginkgo-output-buffer))
 	(pop-to-buffer ginkgo-output-buffer)
 	(erase-buffer)
 	(other-window 1)
@@ -106,12 +112,18 @@
 	  (message "No focus string is stored")
 	(ginkgo--run "-focus" ginkgo--last-focus)))
 
+(defun ginkgo-toggle-pwd-as-test-dir ()
+  (interactive)
+  (setq ginkgo-use-pwd-as-test-dir (not ginkgo-use-pwd-as-test-dir))
+  (message "ginkgo-use-pwd-as-test-dir is %s" ginkgo-use-pwd-as-test-dir))
+
 (defun ginkgo--make-keymap ()
   (let ((map (make-sparse-keymap)))
 	(define-key map (kbd "C-c st") 'ginkgo-set-test-dir)
 	(define-key map (kbd "C-c ta") 'ginkgo-run-all)
 	(define-key map (kbd "C-c tt") 'ginkgo-run-this-container)
 	(define-key map (kbd "C-c tl") 'ginkgo-run-last)
+	(define-key map (kbd "C-c tp") 'ginkgo-toggle-pwd-as-test-dir)
 	map))
 
 (define-minor-mode ginkgo-mode
