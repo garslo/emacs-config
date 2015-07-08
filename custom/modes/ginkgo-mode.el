@@ -115,7 +115,25 @@
 (defun ginkgo-toggle-pwd-as-test-dir ()
   (interactive)
   (setq ginkgo-use-pwd-as-test-dir (not ginkgo-use-pwd-as-test-dir))
+  (ginkgo--update-lighter)
   (message "ginkgo-use-pwd-as-test-dir is %s" ginkgo-use-pwd-as-test-dir))
+
+(defun ginkgo--update-lighter ()
+  (setcar (cdr (assq 'ginkgo-mode minor-mode-alist)) (ginkgo--lighter)))
+
+(defun ginkgo--lighter ()
+  (if ginkgo-use-pwd-as-test-dir
+	  " Ginkgo[pwd]"
+	" Ginkgo"))
+
+(defun ginkgo-bootstrap ()
+  (interactive)
+  (shell-command "ginkgo bootstrap"))
+
+(defun gingko-generate ()
+  (interactive)
+  (let ((gen-file (file-name-base (buffer-file-name))))
+	(shell-command (format "ginkgo generate %s" gen-file))))
 
 (defun ginkgo--make-keymap ()
   (let ((map (make-sparse-keymap)))
@@ -124,11 +142,13 @@
 	(define-key map (kbd "C-c tt") 'ginkgo-run-this-container)
 	(define-key map (kbd "C-c tl") 'ginkgo-run-last)
 	(define-key map (kbd "C-c tp") 'ginkgo-toggle-pwd-as-test-dir)
+	(define-key map (kbd "C-c gg") 'ginkgo-generate)
+	(define-key map (kbd "C-c gb") 'ginkgo-bootstrap)
 	map))
 
 (define-minor-mode ginkgo-mode
   "Minor mode for ginkgo"
-  :lighter " Ginkgo"
+  :lighter (ginkgo--lighter)
   :keymap (ginkgo--make-keymap))
 
 (defun ginkgo-mode-on ()

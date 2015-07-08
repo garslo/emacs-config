@@ -29,9 +29,6 @@
 ;; A better find files
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-;; Spotify!
-(global-set-key (kbd "C-c m") 'helm-spotify)
-
 ;; Easier frame shortcuts
 (global-set-key (kbd "C-c f") 'make-frame-command)
 (global-set-key (kbd "C-c k") 'delete-frame)

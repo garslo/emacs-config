@@ -52,4 +52,7 @@
 			(local-set-key (kbd "C-c t f") 'go-test-current-file)
 			(local-set-key (kbd "C-c t t") 'go-test-current-test)
 			(local-set-key (kbd "C-c g e") 'go-errcheck)
-			(local-set-key (kbd "C-c l") 'golint)))
+			(local-set-key (kbd "C-c l") 'golint)
+			(local-set-key (kbd "C-c mi") 'gobb-make-interface)
+			(local-set-key (kbd "C-c mb") 'gobb-make-builder)
+			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)))

@@ -13,17 +13,18 @@
 		 (getenv "PATH")))
 
 (add-hook 'after-init-hook
-	  #'(lambda ()
-		  (load "functions") ; must be first
-		  (load "packages")
-	      (load "visuals")
-	      (load "behavior")
-		  (load "mode-setup")
-		  (load "keybindings")
-		  (load "go")
-		  (load "go-helper-mode")
-		  (load "ginkgo-mode")
-		  (load "go-autocomplete")))
+		  #'(lambda ()
+			  (load "functions") ; must be first
+			  (load "packages")
+			  (load "visuals")
+			  (load "behavior")
+			  (load "mode-setup")
+			  (load "gobb")
+			  (load "keybindings")
+			  (load "go")
+			  (load "go-helper-mode")
+			  (load "ginkgo-mode")
+			  (load "go-autocomplete")))
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)
@@ -34,6 +35,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes (quote ("fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
+ '(ess-default-style (quote RStudio))
  '(garslo-go-tool-workspace "/usr")
  '(go-rename-command "~/bin/gorename")
  '(helm-ff-newfile-prompt-p nil)
@@ -45,3 +47,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(put 'narrow-to-region 'disabled nil)
