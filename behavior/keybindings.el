@@ -29,6 +29,9 @@
 ;; A better find files
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
+;; swoop!
+(global-set-key (kbd "C-c C-s") 'helm-swoop)
+
 ;; Easier frame shortcuts
 (global-set-key (kbd "C-c f") 'make-frame-command)
 (global-set-key (kbd "C-c k") 'delete-frame)

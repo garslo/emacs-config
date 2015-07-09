@@ -46,6 +46,7 @@
  'slime
  'haskell-mode
  'avy
+ 'helm-swoop
 )
 
 ;(package-initialize)
