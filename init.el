@@ -41,6 +41,7 @@
  '(garslo-go-tool-workspace "/usr")
  '(go-rename-command "~/bin/gorename")
  '(helm-ff-newfile-prompt-p nil)
+ '(helm-truncate-lines t)
  '(jira-url "https://jira.atlas.llnw.com/rpc/xmlrpc")
  '(python-shell-virtualenv-path "/home/garslo/storage/dev/test"))
 (custom-set-faces
