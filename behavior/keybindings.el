@@ -32,6 +32,13 @@
 ;; swoop!
 (global-set-key (kbd "C-c C-s") 'helm-multi-swoop-all)
 
+;; better M-x
+(global-set-key (kbd "M-x") 'helm-M-x)
+(setq helm-M-x-fuzzy-match t)
+
+;; nice kill ring
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+
 ;; Easier frame shortcuts
 (global-set-key (kbd "C-c f") 'make-frame-command)
 (global-set-key (kbd "C-c k") 'delete-frame)
