@@ -23,6 +23,7 @@
 			  (load "keybindings")
 			  (load "go")
 			  (load "go-helper-mode")
+			  (load "goh-mode")
 			  (load "ginkgo-mode")
 			  (load "go-autocomplete")
 			  (load "oracle")))

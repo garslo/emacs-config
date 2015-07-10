@@ -27,6 +27,10 @@
 (require 'go-helper-mode)
 (go-helper-global-mode 1)
 
+;; goh
+(require 'goh-mode)
+(goh-global-mode 1)
+
 ;; ginkgo
 (require 'ginkgo-mode)
 

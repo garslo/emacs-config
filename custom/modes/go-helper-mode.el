@@ -124,8 +124,8 @@ to set this variable."
 
 (defun go-helper-make-keymap ()
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c r") 'go-helper-goto-repo)
-    (define-key map (kbd "C-c w") 'go-helper-goto-workspace)
+    ;(define-key map (kbd "C-c r") 'go-helper-goto-repo)
+    ;(define-key map (kbd "C-c w") 'go-helper-goto-workspace)
 	(define-key map (kbd "C-c sw") 'go-helper-set-pwd-as-workspace)
     (define-key map (kbd "C-c ss") 'go-helper-set-oracle-scope)
     (define-key map (kbd "C-c sg") 'go-helper-set-gocode-lib-path)
