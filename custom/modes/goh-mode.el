@@ -87,6 +87,11 @@
   (let ((package (goh--fuzzy-find-package)))
 	(find-file (concat (goh--get-gopath) "/src/" package))))
 
+(defun goh-wipe-package-index ()
+  (interactive)
+  (goh--wipe-package-index)
+  (message "package index wiped"))
+
 (defun goh-make-keymap ()
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c r") 'goh-switch-repo)

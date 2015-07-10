@@ -24,7 +24,7 @@
 (setq ns-command-modifier (quote meta))
 
 ;; A handy popup
-(global-set-key (kbd "C-c h") 'helm-mini)
+(global-set-key (kbd "C-x b") 'helm-mini)
 
 ;; A better find files
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
