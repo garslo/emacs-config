@@ -23,11 +23,6 @@
 (setq gofmt-command (garslo-go--path "bin/goimports"))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
-;; oracle
-;(add-to-list 'load-path (garslo-go--path "src/code.google.com/p/go.tools/cmd/oracle"))
-;(require 'go-oracle)
-(defun go-oracle-mode (x) nil)
-
 ;; go-helper
 (require 'go-helper-mode)
 (go-helper-global-mode 1)

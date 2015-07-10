@@ -94,7 +94,7 @@ to set this variable."
   (let* ((gopath (expand-file-name (getenv "GOPATH")))
         (repo-dir (expand-file-name default-directory))
         (current-package (go-helper-path-subtract gopath repo-dir)))
-    (setq go-oracle-scope repo-dir)
+    (setq go-oracle-scope current-package)
     (message "Oracle scope: %s" current-package)))
 
 (defun go-helper-set-gocode-lib-path ()

@@ -24,7 +24,8 @@
 			  (load "go")
 			  (load "go-helper-mode")
 			  (load "ginkgo-mode")
-			  (load "go-autocomplete")))
+			  (load "go-autocomplete")
+			  (load "oracle")))
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)

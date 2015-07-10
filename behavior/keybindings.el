@@ -30,7 +30,7 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; swoop!
-(global-set-key (kbd "C-c C-c h") 'helm-multi-swoop-all)
+(global-set-key (kbd "C-c C-s") 'helm-multi-swoop-all)
 
 ;; Easier frame shortcuts
 (global-set-key (kbd "C-c f") 'make-frame-command)
