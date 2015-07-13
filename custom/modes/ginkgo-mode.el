@@ -61,7 +61,7 @@
     "Holds the description of the last test that was run")
 
 (defun ginkgo--prompt ()
-  (read-file-name "Ginko dir: "))
+  (read-directory-name "Ginko dir: "))
 
 (defun ginkgo--get-test-dir ()
   (cond
