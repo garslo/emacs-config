@@ -13,7 +13,7 @@
 ;; 5. Set workspace
 ;;    a) Set GOPATH variable
 
-(defcustom goh-ws-base-dir "~/dev/llnw"
+(defcustom goh-ws-base-dir-alist '("~/dev/llnw")
   "Location of your -ws directories"
   :type 'string
   :group 'goh
@@ -56,11 +56,14 @@
 		(goh-prompt-for-gopath)
 	  gopath)))
 
-(defun goh--ls-dirs (dir)
+(defun goh--ls-dir (dir)
   (split-string (shell-command-to-string (format "ls -d %s/*/" dir)) "\n"))
 
+(defun goh--ls-dirs (dirs)
+  (-flatten (mapcar 'goh--ls-dir dirs)))
+
 (defun goh--fuzzy-find-ws ()
-  (let ((search-index (grizzl-make-index (goh--ls-dirs goh-ws-base-dir))))
+  (let ((search-index (grizzl-make-index (goh--ls-dirs goh-ws-base-dir-alist))))
 	(grizzl-completing-read "Workspace: " search-index)))
 
 (defun goh--goto-ws (ws)

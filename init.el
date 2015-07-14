@@ -40,6 +40,7 @@
  '(ess-default-style (quote RStudio))
  '(garslo-go-tool-workspace "/usr")
  '(go-rename-command "~/bin/gorename")
+ '(goh-ws-base-dir-alist (quote ("~/dev/llnw" "~/dev/go")))
  '(helm-ff-newfile-prompt-p nil)
  '(helm-truncate-lines t)
  '(jira-url "https://jira.atlas.llnw.com/rpc/xmlrpc")
