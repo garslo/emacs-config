@@ -31,7 +31,8 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;; swoop!
-(global-set-key (kbd "C-c C-s") 'helm-multi-swoop-all)
+(global-set-key (kbd "C-c C-s") 'helm-swoop)
+(global-set-key (kbd "C-c a") 'helm-swoop)
 
 ;; better M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
