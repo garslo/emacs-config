@@ -27,7 +27,7 @@
 
 (defun goh--make-package-index ()
   (message "Creating one-time package index...")
-  (let ((packages (split-string (shell-command-to-string "go list git.llnw.com/...") "\n")))
+  (let ((packages (split-string (shell-command-to-string "go list ./...") "\n")))
 	(setq goh--package-index (grizzl-make-index packages))))
 
 (defun goh--get-package-index ()
@@ -73,11 +73,18 @@
 
 (defun goh-switch-ws ()
   (interactive)
-  (let ((ws (goh--fuzzy-find-ws)))
-	(goh--wipe-package-index)
+  (goh--set-ws (goh--fuzzy-find-ws)))
+
+(defun goh--set-ws (ws)
+  (goh--wipe-package-index)
 	(goh--set-gopath-env ws)
 	(goh-set-gocode-lib-path)
-	(goh--goto-ws ws)))
+	(goh--goto-ws ws)
+	(message (format "workspace is %s" ws)))
+
+(defun goh-set-pwd-as-ws ()
+  (interactive)
+  (goh--set-ws (expand-file-name default-directory)))
 
 (defun goh--fuzzy-find-package ()
   (grizzl-completing-read "Package: " (goh--get-package-index)))
@@ -96,6 +103,7 @@
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c r") 'goh-switch-repo)
     (define-key map (kbd "C-c w") 'goh-switch-ws)
+	(define-key map (kbd "C-c sw") 'goh-set-pwd-as-ws)
     map))
 
 (define-minor-mode goh-mode
