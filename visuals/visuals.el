@@ -17,3 +17,5 @@
 (setq column-number-mode t)
 ;; Smaller tabs
 (setq default-tab-width 4)
+;; smart-mode-line
+(sml/setup)
