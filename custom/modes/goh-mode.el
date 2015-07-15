@@ -80,8 +80,13 @@
 
 (defun goh-switch-repo ()
   (interactive)
-  (let ((package (goh--fuzzy-find-package)))
-	(find-file (concat (goh--get-gopath) "/src/" package))))
+  (let* ((package (goh--fuzzy-find-package))
+		(gopath-pkg-path (concat (goh--get-gopath) "/src/" package))
+		(goroot-pkg-path (concat (goh--get-goroot) "/src/" package)))
+	(cond
+	 ((file-exists-p gopath-pkg-path) (find-file gopath-pkg-path))
+	 ((file-exists-p goroot-pkg-path) (find-file goroot-pkg-path))
+	 (t (message (format "package %s not found in GOPATH or GOROOT"))))))
 
 (defun goh-make-keymap ()
   (let ((map (make-sparse-keymap)))
