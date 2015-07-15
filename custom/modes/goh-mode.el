@@ -17,21 +17,8 @@
   :group 'goh
   :safe 'string)
 
-(defvar goh--package-index nil
-  "Cached search index for helm")
-
-(defun goh--wipe-package-index ()
-  (setq goh--package-index nil))
-
-(defun goh--make-package-index ()
-  (message "Creating one-time package index...")
-  (let ((packages (split-string (shell-command-to-string "go list ./...") "\n")))
-	(setq goh--package-index packages)))
-
 (defun goh--get-package-index ()
-  (if (not goh--package-index)
-	  (goh--make-package-index)
-	goh--package-index))
+  (go-packages))
 
 (defun goh--get-goroot ()
   (getenv "GOROOT"))
@@ -78,11 +65,10 @@
   (goh--set-ws (goh--fuzzy-find-ws)))
 
 (defun goh--set-ws (ws)
-  (goh--wipe-package-index)
-	(goh--set-gopath-env ws)
-	(goh-set-gocode-lib-path)
-	(goh--goto-ws ws)
-	(message (format "workspace is %s" ws)))
+  (goh--set-gopath-env ws)
+  (goh-set-gocode-lib-path)
+  (goh--goto-ws ws)
+  (message (format "workspace is %s" ws)))
 
 (defun goh-set-pwd-as-ws ()
   (interactive)
@@ -96,11 +82,6 @@
   (interactive)
   (let ((package (goh--fuzzy-find-package)))
 	(find-file (concat (goh--get-gopath) "/src/" package))))
-
-(defun goh-wipe-package-index ()
-  (interactive)
-  (goh--wipe-package-index)
-  (message "package index wiped"))
 
 (defun goh-make-keymap ()
   (let ((map (make-sparse-keymap)))
