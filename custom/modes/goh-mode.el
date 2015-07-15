@@ -1,5 +1,3 @@
-(require 'grizzl)
-
 (defgroup goh nil
   "Helper functions for Go interaction"
   :group 'go)
@@ -20,7 +18,7 @@
   :safe 'string)
 
 (defvar goh--package-index nil
-  "Cached search index for grizzl")
+  "Cached search index for helm")
 
 (defun goh--wipe-package-index ()
   (setq goh--package-index nil))
@@ -28,7 +26,7 @@
 (defun goh--make-package-index ()
   (message "Creating one-time package index...")
   (let ((packages (split-string (shell-command-to-string "go list ./...") "\n")))
-	(setq goh--package-index (grizzl-make-index packages))))
+	(setq goh--package-index packages)))
 
 (defun goh--get-package-index ()
   (if (not goh--package-index)
@@ -63,8 +61,9 @@
   (-flatten (mapcar 'goh--ls-dir dirs)))
 
 (defun goh--fuzzy-find-ws ()
-  (let ((search-index (grizzl-make-index (goh--ls-dirs goh-ws-base-dir-alist))))
-	(grizzl-completing-read "Workspace: " search-index)))
+  (helm :sources (helm-build-async-source "workspaces"
+				   :candidates-process (lambda ()
+						 (goh--ls-dirs goh-ws-base-dir-alist)))))
 
 (defun goh--goto-ws (ws)
   (find-file ws))
@@ -90,7 +89,8 @@
   (goh--set-ws (expand-file-name default-directory)))
 
 (defun goh--fuzzy-find-package ()
-  (grizzl-completing-read "Package: " (goh--get-package-index)))
+  (helm :sources (helm-build-async-source "packages"
+				   :candidates-process 'goh--get-package-index)))
 
 (defun goh-switch-repo ()
   (interactive)
