@@ -25,7 +25,7 @@
 (defun gobb-make-interface ()
   (interactive)
   (gobb--run-cmd-at-point
-   (gobb--make-cmd gobb-binary "-interface" "-o" (number-to-string (point)) (buffer-file-name))))
+   (gobb--make-cmd gobb-binary "-interface" "-unexported" "-o" (number-to-string (point)) (buffer-file-name))))
 
 (defun gobb-make-builder ()
   (interactive)

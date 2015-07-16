@@ -47,6 +47,8 @@
  'haskell-mode
  'avy
  'helm-swoop
+ 'smart-mode-line
+ 'discover-my-major
 )
 
 ;(package-initialize)

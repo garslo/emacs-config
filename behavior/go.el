@@ -37,8 +37,7 @@
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
-                          (ginkgo-mode)
-						  ))
+                          (ginkgo-mode)))
 
 ;;;; Keybindings
 (add-hook 'go-mode-hook
