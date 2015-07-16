@@ -2,6 +2,11 @@
 
 # Setup
 
+```sh
+$ mv ~/.emacs.d ~/dot_emacs.d_backup
+$ git clone github.com/garslo/emacs-config ~/.emacs.d
+```
+
 `init.el` contains a list of sort-of logical groupings of
 configuration. On the initial run you may want to comment out the
 
@@ -21,14 +26,7 @@ containing your Go tools.
 
 ## Necessary tools for Go
 
-- `gocode`
-- `godef`
-- `errcheck`
-- `golint`
-- `oracle`
-- `goimports`
-
-Running `setup.sh` will fetch these for you (in `~/go/go-tools-ws` by default).
+TODO
 
 # Go
 
@@ -36,26 +34,39 @@ A quick run-through of useful Go features:
 
 ## Custom Keybindings
 
-| Binding   | Package          | Description                                                                             |
-| ---       | ---              | ---                                                                                     |
-| `C-c w`   | `go-helper-mode` | Prompts for a workspace, switches to it, and keeps track of current workspace           |
-| `C-c r`   | `go-helper-mode` | Prompts for repository and switches to it. Must be run after `go-helper-goto-workspace` |
-| `C-c s s` | `go-helper-mode` | Sets oracle's scope to the current package                                              |
-| `C-c s g` | `go-helper-mode` | Sets gocode's lib-path to the current workspace's `pkg/linux_amd64` directory           |
-| `C-c i s` | `go-helper-mode` | Installs all subpackages of the current package                                         |
-| `C-c g f` | `ginkgo-mode`    | Toggles the containing Ginkgo closure between focussed/non-focussed                     |
-| `C-c g p` | `ginkgo-mode`    | Toggles the containing Ginkgo closure between pending/non-pending                       |
-| `C-c c`   | `builtin`        | Runs `go build` on the current directory                                                |
-| `C-c g r` | `gotest`         | Calls `go run` on the current file                                                      |
-| `C-c t p` | `gotest`         | Calls `go test ./...` in the current directory                                          |
-| `C-c t f` | `gotest`         | Runs `go test` on the test file corresponding to the current file                       |
-| `C-c t t` | `gotest`         | Runs `go test` on the specific test corresponding to the current function               |
-| `C-c g e` | `go-errcheck`    | Runs `errcheck` on the current file                                                     |
-| `C-c l`   | `golint`         | Runs `golint` in the current file                                                       |
-| `C-c C-j` | `go-mode`        | `godef` jump to definition                                                              |
-| `C-c C-d` | `go-mode`        | `godef` describe                                                                        |
-| Many      | `go-oracle`      | Execute `C-h a oracle` to see available bindings                                        |
+### go-mode
 
+While editing a `.go` file, the following commands will work:
+
+| Binding   | Package       | Function                          | Description                                                  |
+| ---       | ---           | ---                               | ---                                                          |
+| `C-c g r` | `go-mode`     | `go-run`                          | Calls `go run` on the current file                           |
+| `C-c c`   | `go-mode`     | anonymous                         | Calls `go build` in the current directory                    |
+| `C-c m i` | `gobb`        | `gobb-make-interface`             | Generates an interface for the struct under point            |
+| `C-c m b` | `gobb`        | `gobb-make-builder`               | Generates a builder for the struct under point               |
+| `C-c m m` | `gobb`        | `gobb-make-builder-and-interface` | Generates a builder and interface for the struct under point |
+| `C-c s t` | `ginkgo-mode` | `ginkgo-set-test-dir`             | Prompts for a directory that will serve as the test dir      |
+| `C-c t a` | `ginkgo-mode` | `ginkgo-run-all`                  | Runs all ginkgo tests                                        |
+| `C-c t t` | `ginkgo-mode` | `ginkgo-run-this-container`       | Runs the test that point is currently in                     |
+| `C-c t l` | `ginkgo-mode` | `ginkgo-run-last`                 | Runs the most recently ran container test                    |
+| `C-c t p` | `ginkgo-mode` | `ginkgo-toggle-pwd-as-test-dir`   | Toggles using `pwd` as `ginkgo-test-dir`                     |
+| `C-c g g` | `ginkgo-mode` | `ginkgo-generate`                 | Runs `ginkgo generate` for the current file                  |
+| `C-c g b` | `ginkgo-mode` | `ginkgo-bootstrap`                | Runs `ginkgo bootstrap` in the current directory             |
+| many      | `oracle-mode` | many                              | Type `C-h m` in a `.go` buffer to see bindings               |
+
+These commands will work anywhere (in dired buffers, `*scratch*`, etc.)
+
+| Binding   | Package          | Function                        | Description                                                                                      |
+| ---       | ---              | ---                             | ---                                                                                              |
+| `C-c r`   | `goh-mode`       | `goh-switch-repo`               | Prompts for a repo to switch to                                                                  |
+| `C-c w`   | `goh-mode`       | `goh-switch-ws`                 | Prompts for a workspace to switch to                                                             |
+| `C-c s w` | `goh-mode`       | `goh-set-pwd-as-ws`             | Sets `pwd` as the current workspace                                                              |
+|           | `goh-mode`       | `goh-gen-mocks`                 | Prompts for a package, and calls `go-gen-mocks.sh` on that package                               |
+|           | `goh-mode`       | `goh-get-current-package`       | Returns the current package name as a string                                                     |
+|           | `goh-mode`       | `goh-set-gocode-lib-path`       | Sets the gocode lib path to match the current workspace. Automatically called by `goh-switch-ws` |
+| `C-c s s` | `go-helper-mode` | `go-helper-set-oracle-scope`    | Sets the oracle scope to the current package                                                     |
+| `C-c s g` | `go-helper-mode` | `go-helper-set-gocode-lib-path` | Sets the gocode lib path to match the current workspace                                          |
+| `C-c i s` | `go-helper-mode` | `go-helper-install-subpackages` | Runs `go install ./...` in the current directory                                                 |
 
 
 ## Auto-complete
