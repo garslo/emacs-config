@@ -76,15 +76,14 @@
   (message "ginkgo-test-dir is %s" ginkgo-test-dir))
 
 (defun ginkgo--run (&rest args)
-  (let ((curdir default-directory))
-	(message "Running \"ginkgo %s\" in dir %s" args (ginkgo--get-test-dir))
-	(save-selected-window
-	  (cd ginkgo-test-dir)
+  (save-selected-window
+	(let ((default-directory (concat (ginkgo--get-test-dir) "/"))
+		  (arg-string (mapconcat 'identity args " ")))
 	  (if (get-buffer ginkgo-output-buffer)
-		(kill-buffer ginkgo-output-buffer))
+		  (kill-buffer ginkgo-output-buffer))
 	  (pop-to-buffer ginkgo-output-buffer)
-	  (apply 'make-comint-in-buffer "ginkgo" ginkgo-output-buffer ginkgo-binary nil args)
-	  (cd curdir))))
+	  (async-shell-command (format "%s %s" ginkgo-binary arg-string) ginkgo-output-buffer)
+	  (message (format "running \"ginkgo %s\" in dir %s" arg-string default-directory)))))
 
 (defun ginkgo-run-all ()
   (interactive)
@@ -101,7 +100,7 @@
 	  (setq start (point))
 	  (search-forward "\"")
 	  (setq end (- (point) 1))
-	  (let ((focus (buffer-substring-no-properties start end)))
+	  (let ((focus (format "\"%s\""(buffer-substring-no-properties start end))))
 		(setq ginkgo--last-focus focus)
 		(ginkgo--run "-focus" focus)))))
 

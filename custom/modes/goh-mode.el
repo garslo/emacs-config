@@ -17,6 +17,12 @@
   :group 'goh
   :safe 'string)
 
+(defcustom goh-gen-mocks-binary "go-gen-mocks.sh"
+  "Lcoation of go-gen-mocks.sh script"
+  :type 'string
+  :group 'goh
+  :safe 'string)
+
 (defun goh--get-package-index ()
   (go-packages))
 
@@ -59,6 +65,18 @@
   (interactive)
   (let ((lib-path (format "%spkg/linux_amd64" (goh--get-gopath))))
 	(shell-command (format "gocode set lib-path \"%s\"" lib-path))))
+
+(defun goh-get-current-package ()
+  (interactive)
+  (shell-command-to-string "go list ."))
+
+(defun goh--get-gen-mocks-cmd ()
+  (let ((package (goh--fuzzy-find-package)))
+	(format "%s %s" goh-gen-mocks-binary package)))
+
+(defun goh-gen-mocks ()
+  (interactive)
+  (async-shell-command (goh--get-gen-mocks-cmd) "*go-gen-mocks*"))
 
 (defun goh-switch-ws ()
   (interactive)
