@@ -1,0 +1,3 @@
+# -*- mode:snippet -*-
+# --
+AssertThat($1, $2)$0
