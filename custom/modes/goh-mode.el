@@ -11,7 +11,7 @@
 ;; 5. Set workspace
 ;;    a) Set GOPATH variable
 
-(defcustom goh-ws-base-dir-alist '("~/dev/llnw")
+(defcustom goh-ws-base-dir-list '("~/dev/llnw")
   "Location of your -ws directories"
   :type 'string
   :group 'goh
@@ -56,7 +56,7 @@
 (defun goh--fuzzy-find-ws ()
   (helm :sources (helm-build-async-source "workspaces"
 				   :candidates-process (lambda ()
-						 (goh--ls-dirs goh-ws-base-dir-alist)))))
+						 (goh--ls-dirs goh-ws-base-dir-list)))))
 
 (defun goh--goto-ws (ws)
   (find-file ws))
