@@ -34,10 +34,14 @@
 ;; ginkgo
 (require 'ginkgo-mode)
 
+;; goflycheck
+(require 'go-flycheck)
+
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
-                          (ginkgo-mode)))
+                          (ginkgo-mode)
+						  (flycheck-mode 1)))
 
 ;;;; Keybindings
 (add-hook 'go-mode-hook

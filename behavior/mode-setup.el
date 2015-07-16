@@ -122,3 +122,6 @@
 ;; Allows traversing of CamelCase as two words
 ;;
 (global-subword-mode)
+
+;; yasnippet
+(yas-global-mode 1)

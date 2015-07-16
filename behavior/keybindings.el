@@ -55,5 +55,5 @@
 (global-set-key (kbd "C-c ;") 'avy-goto-word-1)
 (global-set-key (kbd "C-c '") 'avy-goto-char)
 
-;; god-mode
-(global-set-key (kbd "C-o") 'god-mode-all)
+;; yasnippet
+(global-set-key (kbd "M-i") 'yas-expand-from-trigger-key)
