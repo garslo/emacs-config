@@ -81,6 +81,9 @@
 ;;
 (add-to-list 'prog-mode-hook #'linum-mode)
 
+;; org
+(require 'org)
+
 ;; markdown
 (add-hook 'markdown-mode-hook
 		  (lambda ()
