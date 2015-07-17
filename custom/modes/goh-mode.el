@@ -31,6 +31,9 @@
 	  goh--package-index
 	(setq goh--package-index (goh--go-list))))
 
+(defun goh-reset-package-index ()
+  (setq goh--package-index nil))
+
 (defun goh--go-list ()
   (message "Creating package index...")
   (let ((default-directory (goh--get-gopath)))
@@ -100,7 +103,8 @@
 
 (defun goh-switch-ws ()
   (interactive)
-  (goh--set-ws (goh--fuzzy-find-ws)))
+  (goh--set-ws (goh--fuzzy-find-ws))
+  (goh-reset-package-index))
 
 (defun goh--goto-ws (ws)
   (find-file ws))
