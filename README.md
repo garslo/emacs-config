@@ -2,6 +2,10 @@
 
 # Setup
 
+Requires `emacs 24.4` or greater. The latest `magit` bails on `24.3.1`
+(which is available in the ppa). See the
+[docs](https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html).
+
 ```sh
 $ mv ~/.emacs.d ~/dot_emacs.d_backup
 $ git clone github.com/garslo/emacs-config ~/.emacs.d
