@@ -43,6 +43,7 @@
 (add-hook 'prog-mode-hook (lambda ()
                             (local-set-key (kbd "RET")
                                            'electrify-return-if-match)))
+(electric-indent-mode -1)
 
 ;; git
 (add-hook 'git-commit-mode-hook

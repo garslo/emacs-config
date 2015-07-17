@@ -40,10 +40,10 @@
    (quote
 	("c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "fc5fcb6f1f1c1bc01305694c59a1a861b008c534cae8d0e48e4d5e81ad718bc6" "1e7e097ec8cb1f8c3a912d7e1e0331caeed49fef6cff220be63bd2a6ba4cc365" default)))
  '(ess-default-style (quote RStudio))
+ '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(garslo-go-tool-workspace "/usr")
  '(go-rename-command "~/bin/gorename")
  '(goflymake-debug t)
- '(gofmt-show-errors nil)
  '(goh-ws-base-dir-alist (quote ("~/dev/llnw" "~/dev/go")))
  '(helm-ff-newfile-prompt-p nil)
  '(helm-truncate-lines t t)

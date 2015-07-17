@@ -79,8 +79,8 @@
   (save-selected-window
 	(let ((default-directory (concat (ginkgo--get-test-dir) "/"))
 		  (arg-string (mapconcat 'identity args " ")))
-	  (if (get-buffer ginkgo-output-buffer)
-		  (kill-buffer ginkgo-output-buffer))
+	;(if (get-buffer ginkgo-output-buffer)
+	;	  (kill-buffer ginkgo-output-buffer))
 	  (pop-to-buffer ginkgo-output-buffer)
 	  (async-shell-command (format "%s %s" ginkgo-binary arg-string) ginkgo-output-buffer)
 	  (message (format "running \"ginkgo %s\" in dir %s" arg-string default-directory)))))
