@@ -23,8 +23,18 @@
   :group 'goh
   :safe 'string)
 
+(defvar goh--package-index nil
+  "Package index")
+
 (defun goh--get-package-index ()
-  (go-packages))
+  (if goh--package-index
+	  goh--package-index
+	(setq goh--package-index (goh--go-list))))
+
+(defun goh--go-list ()
+  (message "Creating package index...")
+  (let ((default-directory (goh--get-gopath)))
+	(split-string (shell-command-to-string "go list ./..."))))
 
 (defun goh--get-goroot ()
   (getenv "GOROOT"))
@@ -53,10 +63,44 @@
 (defun goh--ls-dirs (dirs)
   (-flatten (mapcar 'goh--ls-dir dirs)))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Repo navigation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar goh--helm-package-source
+  '((name . "packages")
+	(candidates-process . goh--get-package-index)
+	(action . goh--goto-package)))
+
+(defun goh--goto-package (package)
+  (let ((path (concat (goh--get-gopath) "/src/" package)))
+	(cond
+	 ((not package) nil)
+	 ((file-exists-p path) (find-file path))
+	 (t (message (format "package %s not found in GOPATH" package))))))
+
+(defun goh--fuzzy-find-package ()
+  (helm :sources '(goh--helm-package-source)
+		:buffer "*GOPATH packages*"))
+
+(defun goh-switch-repo ()
+  (interactive)
+  (goh--fuzzy-find-package))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; ws navigation
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar goh--helm-ws-source
+  '((name . "workspaces")
+	(candidates-process . (lambda () (goh--ls-dirs goh-ws-base-dir-list)))
+	(action . goh--set-ws)))
+
 (defun goh--fuzzy-find-ws ()
-  (helm :sources (helm-build-async-source "workspaces"
-				   :candidates-process (lambda ()
-						 (goh--ls-dirs goh-ws-base-dir-list)))))
+  (helm :sources '(goh--helm-ws-source)
+		:buffer "*Workspaces*"))
+
+(defun goh-switch-ws ()
+  (interactive)
+  (goh--set-ws (goh--fuzzy-find-ws)))
 
 (defun goh--goto-ws (ws)
   (find-file ws))
@@ -78,33 +122,18 @@
   (interactive)
   (async-shell-command (goh--get-gen-mocks-cmd) "*go-gen-mocks*"))
 
-(defun goh-switch-ws ()
-  (interactive)
-  (goh--set-ws (goh--fuzzy-find-ws)))
-
 (defun goh--set-ws (ws)
   (goh--set-gopath-env ws)
   (goh-set-gocode-lib-path)
+  (message (format "workspace is %s" ws))
   (goh--goto-ws ws)
-  (message (format "workspace is %s" ws)))
+  ws)
 
 (defun goh-set-pwd-as-ws ()
   (interactive)
   (goh--set-ws (expand-file-name default-directory)))
 
-(defun goh--fuzzy-find-package ()
-  (helm :sources (helm-build-async-source "packages"
-				   :candidates-process 'goh--get-package-index)))
 
-(defun goh-switch-repo ()
-  (interactive)
-  (let* ((package (goh--fuzzy-find-package))
-		(gopath-pkg-path (concat (goh--get-gopath) "/src/" package))
-		(goroot-pkg-path (concat (goh--get-goroot) "/src/" package)))
-	(cond
-	 ((file-exists-p gopath-pkg-path) (find-file gopath-pkg-path))
-	 ((file-exists-p goroot-pkg-path) (find-file goroot-pkg-path))
-	 (t (message (format "package %s not found in GOPATH or GOROOT"))))))
 
 (defun goh-make-keymap ()
   (let ((map (make-sparse-keymap)))
