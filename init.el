@@ -55,8 +55,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(helm-selection ((t (:foreground "cyan" :underline t))))
+ '(magit-blame-hash ((t (:inherit default))))
  '(magit-diff-added ((t (:background "green" :foreground "black"))))
  '(magit-diff-added-highlight ((t (:background "green" :foreground "black"))))
  '(magit-diff-base ((t (:background "#555522" :foreground "white"))))
- '(magit-diff-base-highlight ((t (:background "#666622" :foreground "white")))))
+ '(magit-diff-base-highlight ((t (:background "#666622" :foreground "white"))))
+ '(magit-hash ((t (:foreground "white")))))
 (put 'narrow-to-region 'disabled nil)
