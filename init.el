@@ -45,6 +45,7 @@
  '(go-rename-command "~/bin/gorename")
  '(goflymake-debug t)
  '(goh-ws-base-dir-alist (quote ("~/dev/llnw" "~/dev/go")))
+ '(goh-ws-base-dir-list (quote ("~/dev/llnw" "~/dev/go")))
  '(helm-ff-newfile-prompt-p nil)
  '(helm-truncate-lines t t)
  '(jira-url "https://jira.atlas.llnw.com/rpc/xmlrpc")
