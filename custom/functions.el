@@ -33,11 +33,7 @@ return.")
 open and indent an empty line between the cursor and the text. Move the
 cursor to the new line."
   (interactive "P")
-  (let ((case-fold-search nil))
-    (if (looking-at electrify-return-match)
-	(save-excursion (newline-and-indent)))
-    (newline arg)
-    (indent-according-to-mode)))
+  (electric-newline-and-maybe-indent))
 
 
 ;; From http://stackoverflow.com/questions/10092322/how-to-automatically-install-emacs-packages-by-specifying-a-list-of-package-name
