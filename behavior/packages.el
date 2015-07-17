@@ -29,8 +29,6 @@
  'helm
  'f
  'magit
- 'git-rebase-mode
- 'git-commit-mode
  'paredit
  'popup
  'projectile
@@ -49,6 +47,7 @@
  'helm-swoop
  'smart-mode-line
  'discover-my-major
+ 'yasnippet
 )
 
 ;(package-initialize)
