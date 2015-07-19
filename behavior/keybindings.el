@@ -47,9 +47,9 @@
 (global-set-key (kbd "M-`") 'other-frame)
 
 ;; multiple-cursors
-(global-set-key (kbd "C-c .") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c ,") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-_") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-c C-.") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-c C-,") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-/") 'mc/mark-all-like-this)
 
 ;; avy
 (global-set-key (kbd "C-c ;") 'avy-goto-word-1)
@@ -57,3 +57,6 @@
 
 ;; yasnippet
 (global-set-key (kbd "M-i") 'yas-expand-from-trigger-key)
+
+;; expand-region
+(global-set-key (kbd "C-=") 'er/expand-region)

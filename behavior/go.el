@@ -51,4 +51,6 @@
 			(local-set-key (kbd "C-c l") 'golint)
 			(local-set-key (kbd "C-c mi") 'gobb-make-interface)
 			(local-set-key (kbd "C-c mb") 'gobb-make-builder)
-			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)))
+			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)
+			(key-chord-define-local "oi" 'go-oracle-implements)
+			(key-chord-define-local "or" 'go-oracle-referrers)))

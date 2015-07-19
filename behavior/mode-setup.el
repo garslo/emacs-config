@@ -129,3 +129,12 @@
 
 ;; yasnippet
 (yas-global-mode 1)
+
+;; expand-region
+(require 'expand-region)
+
+;; pending delete mode
+(pending-delete-mode 1)
+
+;; key-chord
+(key-chord-mode 1)

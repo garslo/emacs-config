@@ -48,6 +48,7 @@
  'smart-mode-line
  'discover-my-major
  'yasnippet
+ 'key-chord
 )
 
 ;(package-initialize)
