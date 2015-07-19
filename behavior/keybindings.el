@@ -60,3 +60,6 @@
 
 ;; expand-region
 (global-set-key (kbd "C-=") 'er/expand-region)
+
+;; eval-and-replace
+(global-set-key (kbd "C-c C-e") 'eval-and-replace)

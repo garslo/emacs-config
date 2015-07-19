@@ -54,3 +54,12 @@ Return a list of installed packages or nil for every skipped package."
 (defun git-get-version ()
   (interactive)
   (insert (magit-git-string "describe" "--tags")))
+
+(defun eval-and-replace ()
+  (interactive)
+  (backward-kill-sexp)
+  (condition-case nil
+	  (prin1 (eval (read (current-kill 0)))
+			 (current-buffer))
+	(error (message "Invalid expression")
+		   (insert (current-kill 0)))))
