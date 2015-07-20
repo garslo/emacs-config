@@ -49,6 +49,8 @@
  'discover-my-major
  'yasnippet
  'key-chord
+ 'helm-commandlinefu
+ 'paradox
 )
 
 ;(package-initialize)

@@ -49,6 +49,7 @@
  '(helm-ff-newfile-prompt-p nil)
  '(helm-truncate-lines t t)
  '(jira-url "https://jira.atlas.llnw.com/rpc/xmlrpc")
+ '(paradox-github-token t)
  '(python-shell-virtualenv-path "/home/garslo/storage/dev/test"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
