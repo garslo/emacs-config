@@ -51,6 +51,7 @@
  'key-chord
  'helm-commandlinefu
  'paradox
+ 'expand-region
 )
 
 ;(package-initialize)
