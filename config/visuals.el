@@ -1,13 +1,13 @@
 ;; For graphical displays only...
 (when (display-graphic-p)
-;; Best theme there is
-(load-theme 'tango-dark)
-;; Remove the toolbar
-(tool-bar-mode -1)
-;; Remove the scrollbar
-(scroll-bar-mode -1)
-;; Smaller font size
-(set-face-attribute 'default nil :height 100) ; :height 100 => 10pt
+  ;; Best theme there is
+  (load-theme 'tango-dark)
+  ;; Remove the toolbar
+  (tool-bar-mode -1)
+  ;; Remove the scrollbar
+  (scroll-bar-mode -1)
+  ;; Smaller font size
+  (set-face-attribute 'default nil :height 100) ; :height 100 => 10pt
 )
 ;; Remove the Emacs welcome screen
 (setq inhibit-splash-screen t)
@@ -17,5 +17,3 @@
 (setq column-number-mode t)
 ;; Smaller tabs
 (setq default-tab-width 4)
-;; smart-mode-line
-(sml/setup)

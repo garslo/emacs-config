@@ -137,8 +137,6 @@
   (interactive)
   (goh--set-ws (expand-file-name default-directory)))
 
-
-
 (defun goh-make-keymap ()
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "C-c r") 'goh-switch-repo)
