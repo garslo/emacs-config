@@ -52,6 +52,7 @@
  'helm-commandlinefu
  'paradox
  'expand-region
+ 'helm-projectile
 )
 
 ;(package-initialize)
