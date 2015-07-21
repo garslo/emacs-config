@@ -1,28 +1,8 @@
-;(add-to-list 'load-path "~/.emacs.d/visuals")
-;(add-to-list 'load-path "~/.emacs.d/behavior")
-;(add-to-list 'load-path "~/.emacs.d/custom")
-;(add-to-list 'load-path "~/.emacs.d/custom/modes")
-
 (load "~/.emacs.d/functions.el")
-
 (add-hook 'after-init-hook
 		  #'(lambda ()
 			  (load-directory (expand-file-name "~/.emacs.d/site-lisp"))
-			  (load-directory (expand-file-name "~/.emacs.d/config"))
-			  ;(load "functions") ; must be first
-			  ;(load "packages")
-			  ;(load "visuals")
-			  ;(load "behavior")
-			  ;(load "mode-setup")
-			  ;(load "gobb")
-			  ;(load "keybindings")
-			  ;(load "go")
-			  ;(load "go-helper-mode")
-			  ;(load "goh-mode")
-			  ;(load "ginkgo-mode")
-			  ;(load "go-autocomplete")
-			  ;(load "oracle")
-			  ))
+			  (load-directory (expand-file-name "~/.emacs.d/config"))))
 
 ;; Added by emacs itself
 (put 'dired-find-alternate-file 'disabled nil)
