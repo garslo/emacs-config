@@ -1,4 +1,5 @@
 (load "~/.emacs.d/functions.el")
+(load "~/.emacs.d/packages.el")
 (add-hook 'after-init-hook
 		  #'(lambda ()
 			  (load-directory (expand-file-name "~/.emacs.d/site-lisp"))

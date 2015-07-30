@@ -53,6 +53,7 @@
  'paradox
  'expand-region
  'helm-projectile
+ 'undercover
 )
 
 ;(package-initialize)
