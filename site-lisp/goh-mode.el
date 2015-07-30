@@ -32,6 +32,7 @@
 	(setq goh--package-index (goh--go-list))))
 
 (defun goh-reset-package-index ()
+  (interactive)
   (setq goh--package-index nil))
 
 (defun goh--go-list ()
