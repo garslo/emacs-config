@@ -21,7 +21,6 @@
  'go-autocomplete
  'auto-complete
  'go-errcheck
- 'go-play
  'go-projectile
  'go-eldoc
  'gotest
