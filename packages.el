@@ -46,7 +46,6 @@
  'helm-swoop
  'smart-mode-line
  'discover-my-major
- 'yasnippet
  'key-chord
  'helm-commandlinefu
  'paradox
