@@ -1,0 +1,1 @@
+(setenv "GO15VENDOREXPERIMENT" "1")

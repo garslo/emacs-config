@@ -34,7 +34,6 @@
 ;; ginkgo
 (require 'ginkgo-mode)
 
-
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
@@ -52,6 +51,7 @@
 			(local-set-key (kbd "C-c mi") 'gobb-make-interface)
 			(local-set-key (kbd "C-c mb") 'gobb-make-builder)
 			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)
+			(local-set-key (kbd "C-c C-l") 'go-add-indexed-log)
 			;(key-chord-define-local "oi" 'go-oracle-implements)
 			;(key-chord-define-local "or" 'go-oracle-referrers)
 			))

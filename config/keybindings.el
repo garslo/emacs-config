@@ -33,10 +33,14 @@
 ;; swoop!
 (global-set-key (kbd "C-c C-s") 'helm-swoop)
 (global-set-key (kbd "C-c a") 'helm-swoop)
+(global-set-key (kbd "C-c ma") 'helm-multi-swoop-all)
 
 ;; better M-x
 (global-set-key (kbd "M-x") 'helm-M-x)
 (setq helm-M-x-fuzzy-match t)
+
+;;
+(global-set-key (kbd "C-x f") 'helm-ls-git-ls)
 
 ;; nice kill ring
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
@@ -59,7 +63,7 @@
 (global-set-key (kbd "M-i") 'yas-expand-from-trigger-key)
 
 ;; expand-region
-(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-c =") 'er/expand-region)
 
 ;; eval-and-replace
 (global-set-key (kbd "C-c C-e") 'eval-and-replace)

@@ -62,6 +62,7 @@
 (defun go-oracle-set-scope ()
   "Set the scope for the Go oracle, prompting the user to edit the
 previous scope.
+
 The scope specifies a set of arguments, separated by spaces.
 It may be:
 1) a set of packages whose main() functions will be analyzed.
@@ -69,6 +70,7 @@ It may be:
    package (see #3).
 3) a single package whose main() function and/or Test* functions
    will be analyzed.
+
 In the common case, this is similar to the argument(s) you would
 specify to 'go build'."
   (interactive)

@@ -9,4 +9,5 @@
 (add-hook 'emacs-lisp-mode-hook 'my-lispy-settings)
 (add-hook 'inferior-emacs-lisp-mode-hook 'my-lispy-settings)
 (add-hook 'lisp-mode-hook 'my-lispy-settings)
+(add-hook 'clojure-mode-hook 'my-lispy-settings)
 (add-to-list 'auto-mode-alist '("\\.gsp\\'" . lisp-mode))
