@@ -8,7 +8,6 @@
 (load "~/.emacs.d/env.el")
 (load "~/.emacs.d/functions.el")
 (load "~/.emacs.d/packages.el")
-(load "~/.emacs.d/macros.el")
 (add-hook 'after-init-hook
 		  #'(lambda ()
 			  (load-directory (expand-file-name "~/.emacs.d/site-lisp"))
@@ -28,7 +27,6 @@
  '(ess-default-style (quote RStudio))
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(garslo-go-tool-workspace "/usr")
- '(ginkgo-use-default-keys t)
  '(go-rename-command "~/bin/gorename")
  '(goflymake-debug t)
  '(goh-ws-base-dir-alist (quote ("~/dev/llnw" "~/dev/go")))
