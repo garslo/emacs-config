@@ -20,7 +20,6 @@
  'git-gutter
  'go-autocomplete
  'auto-complete
- 'go-errcheck
  'go-projectile
  'go-eldoc
  'gotest
@@ -40,14 +39,11 @@
  'yaml-mode
  'jedi
  'multiple-cursors
- 'slime
- 'haskell-mode
  'avy
  'helm-swoop
  'smart-mode-line
  'discover-my-major
  'key-chord
- 'helm-commandlinefu
  'paradox
  'expand-region
  'helm-projectile
