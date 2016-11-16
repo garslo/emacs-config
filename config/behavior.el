@@ -17,3 +17,8 @@
 
 ;; Make sure we start in the home directory
 (setq default-directory "~/")
+
+(setq initial-major-mode 'markdown-mode)
+(setq initial-scratch-message "# Welcome to emacs
+
+")
