@@ -48,6 +48,7 @@
  'expand-region
  'helm-projectile
  'undercover
+ 'helm-ls-git
 )
 
 ;(package-initialize)
