@@ -27,6 +27,7 @@
  '(ess-default-style (quote RStudio))
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(garslo-go-tool-workspace "/usr")
+ '(ginkgo-use-default-keys t)
  '(go-rename-command "~/bin/gorename")
  '(goflymake-debug t)
  '(goh-ws-base-dir-alist (quote ("~/dev/llnw" "~/dev/go")))

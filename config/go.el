@@ -19,12 +19,12 @@
 (goh-global-mode 1)
 
 ;; ginkgo
-;(require 'ginkgo-mode)
+(require 'ginkgo-mode)
 
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
-						  ))
+						  (ginkgo-mode-on)))
 
 ;;;; Keybindings
 (add-hook 'go-mode-hook
