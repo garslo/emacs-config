@@ -93,10 +93,19 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ws navigation
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun goh--set-ws (ws)
+  (goh--set-gopath-env ws)
+  (goh-set-gocode-lib-path)
+  (message (format "workspace is %s" ws))
+  (goh--goto-ws ws)
+  ws)
+
+(require 'helm)
 (defvar goh--helm-ws-source
-  '((name . "workspaces")
-	(candidates-process . (lambda () (goh--ls-dirs goh-ws-base-dir-list)))
-	(action . goh--set-ws)))
+  (helm-build-sync-source
+	  "workspaces"
+	:candidates (goh--ls-dirs goh-ws-base-dir-list)
+	:action 'goh--set-ws))
 
 (defun goh--fuzzy-find-ws ()
   (helm :sources '(goh--helm-ws-source)
@@ -126,13 +135,6 @@
 (defun goh-gen-mocks ()
   (interactive)
   (async-shell-command (goh--get-gen-mocks-cmd) "*go-gen-mocks*"))
-
-(defun goh--set-ws (ws)
-  (goh--set-gopath-env ws)
-  (goh-set-gocode-lib-path)
-  (message (format "workspace is %s" ws))
-  (goh--goto-ws ws)
-  ws)
 
 (defun goh-set-pwd-as-ws ()
   (interactive)
