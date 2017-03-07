@@ -49,6 +49,7 @@
  'helm-projectile
  'undercover
  'go-guru
+ 'helm-ls-git
 )
 
 ;(package-initialize)

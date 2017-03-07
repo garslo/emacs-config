@@ -29,10 +29,6 @@
  '(ess-default-style (quote RStudio))
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(garslo-go-tool-workspace "/usr")
- '(gh-profile-alist
-   (quote
-	(("github-llnw" :url "https://github.llnw.net/api/v3" :remote-regexp "^\\(?:git@github\\.llnw\\.net:\\|\\(?:git\\|https?\\|ssh\\)://.*@?github\\.llnw\\.net/\\)\\(.*\\)/\\(.*\\)\\(?:\\.git\\)?"))))
- '(gh-profile-default-profile "github-llnw")
  '(ginkgo-use-default-keys t)
  '(go-rename-command "~/bin/gorename")
  '(goflymake-debug t)
