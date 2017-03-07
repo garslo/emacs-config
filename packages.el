@@ -48,6 +48,7 @@
  'expand-region
  'helm-projectile
  'undercover
+ 'go-guru
 )
 
 ;(package-initialize)

@@ -19,12 +19,15 @@
 (goh-global-mode 1)
 
 ;; ginkgo
-;(require 'ginkgo-mode)
+(require 'ginkgo-mode)
+
+(require 'go-guru)
 
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
-						  ))
+						  (ginkgo-mode-on)
+						  (yas-minor-mode -1)))
 
 ;;;; Keybindings
 (add-hook 'go-mode-hook
@@ -37,8 +40,4 @@
 			(local-set-key (kbd "C-c l") 'golint)
 			(local-set-key (kbd "C-c mi") 'gobb-make-interface)
 			(local-set-key (kbd "C-c mb") 'gobb-make-builder)
-			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)
-			(local-set-key (kbd "C-c C-l") 'go-add-indexed-log)
-			;(key-chord-define-local "oi" 'go-oracle-implements)
-			;(key-chord-define-local "or" 'go-oracle-referrers)
-			))
+			(local-set-key (kbd "C-c mm") 'gobb-make-builder-and-interface)))
