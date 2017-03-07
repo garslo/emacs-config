@@ -26,8 +26,7 @@
 ;; hook
 (add-hook 'go-mode-hook (lambda ()
                           (go-eldoc-setup)
-						  (ginkgo-mode-on)
-						  (yas-minor-mode -1)))
+						  (ginkgo-mode-on)))
 
 ;;;; Keybindings
 (add-hook 'go-mode-hook
