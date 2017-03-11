@@ -41,7 +41,7 @@
    (quote
 	(go-guru virtualenvwrapper virtualenv undercover toml-mode toml tern-auto-complete smart-mode-line slime salt-mode rustfmt ruby-tools ruby-dev request rails-new rails-log-mode racer protobuf-mode ponylang-mode php-mode paredit paradox ox-jira org-jira nginx-mode markdown-toc markdown-mode+ magit lua-mode key-chord julia-shell json-rpc js2-refactor jquery-doc jinja2-mode jedi helm-swoop helm-rails helm-projectile helm-project-persist helm-ls-git helm-descbinds helm-dash helm-commandlinefu helm-ag haskell-mode gotest god-mode go-scratch go-rename go-projectile go-play go-errcheck go-dlv go-direx go-autocomplete gitconfig-mode gitconfig git-gutter-fringe gist fsharp-mode forecast flycheck expand-region evil evalator-clojure ensime elein edts dot-mode dom dockerfile-mode docker django-mode django-manage discover-my-major dirtree confluence avy ac-js2 ac-cider)))
  '(paradox-github-token t)
- '(python-shell-virtualenv-path "/home/garslo/storage/dev/test"))
+ '(python-shell-virtualenv-root "/home/garslo/storage/dev/test"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
