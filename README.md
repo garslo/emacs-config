@@ -2,8 +2,8 @@
 
 # Setup
 
-Requires `emacs 24.4` or greater. The latest `magit` bails on `24.3.1`
-(which is available in the ppa). See the
+Requires `emacs 25` or greater. See
+the
 [docs](https://www.gnu.org/software/emacs/manual/html_node/efaq/Installing-Emacs.html).
 
 ```sh
