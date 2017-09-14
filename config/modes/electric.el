@@ -10,5 +10,5 @@
                                            'newline)))
 ;;;;;(electric-indent-mode -1)
 
-(require 'electric-align)
-(add-hook 'prog-mode-hook 'electric-align-mode)
+;(require 'electric-align)
+;(add-hook 'prog-mode-hook 'electric-align-mode)
