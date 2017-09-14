@@ -19,7 +19,7 @@
 (goh-global-mode 1)
 
 ;; ginkgo
-(require 'ginkgo-mode)
+;(require 'ginkgo-mode)
 
 (require 'go-guru)
 
