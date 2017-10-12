@@ -1,7 +1,0 @@
-# -*- mode:snippet -*-
-# --
-Context("$1", func() {
-	It("$2", func() {
-		$0
-	})
-})

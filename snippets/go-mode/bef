@@ -1,5 +1,0 @@
-# -*- mode:snippet -*-
-# --
-BeforeEach(func() {
-	$0
-})

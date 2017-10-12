@@ -5,6 +5,11 @@
 ;;;; #REQUIRES: magit
 (global-set-key (kbd "C-c C-g") 'magit-status)
 
+;; buffer traversal
+(global-set-key (kbd "C-c C-p") 'previous-buffer)
+(global-set-key (kbd "C-c C-n") 'next-buffer)
+(global-set-key (kbd "C-c o") 'switch-to-previous-buffer-in-other-window)
+
 ;; Useful for aligning text
 (global-set-key (kbd "C-c C-a") 'align-regexp)
 
